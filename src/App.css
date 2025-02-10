@@ -1,0 +1,11 @@
+.bigContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 500px) {
+    .bigContainer{
+        display: flex;
+        flex-direction: column;
+    }
+}

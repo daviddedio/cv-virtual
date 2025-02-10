@@ -1,0 +1,52 @@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    https://scontent.fros6-1.fna.fbcdn.net/v/t39.30808-6/462514398_8945753392125947_5398431148014069105_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=cf85f3&_nc_eui2=AeEMoL7lFIw-gCU1uoYwqlOf4Mvq-qSydVHgy-r6pLJ1UVM_NjKwmtcKWOO1WUzg0Dc&_nc_ohc=LUVro1nGQKIQ7kNvgGotx6s&_nc_zt=23&_nc_ht=scontent.fros6-1.fna&_nc_gid=AiQ1QOcSmc3pHyNqjvmxbtr&oh=00_AYC6WgCEsAJv6K6tip35yVt3ZL7U8BCHD9rxUoOZuQbSnQ&oe=67AE82BB
+    https://scontent.fros6-1.fna.fbcdn.net/v/t1.6435-9/65370959_10218963631790757_6405998598781140992_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGpNN5xuWgHsXJQ2HPjHQqIhLM5ESujdn-EszkRK6N2f7af-gnQiQsGXi1Y7j-reEM&_nc_ohc=H7F-5t_9_WsQ7kNvgFis8B5&_nc_zt=23&_nc_ht=scontent.fros6-1.fna&_nc_gid=AMKHhnzcYQSj2ph-6xM1cYt&oh=00_AYB686VQBw5_NlLZZxD4N89Kj4VdJfvuV7NIxyAr54INlA&oe=67D02045
+
+                    <table id="datosPersonales">
+                    <tr>
+                        <td>Nombre y apellido:</td>
+                        <td>David De Dio</td>
+                    </tr>
+                    <tr>
+                        <td>Edad:</td>
+                        <td>39</td>
+                    </tr>
+                    <tr>
+                        <td>Estado civil:</td>
+                        <td>Casado</td>
+                    </tr>
+                    <tr>
+                        <td>Nacionalidad:</td>
+                        <td>Argentino</td>
+                    </tr>
+                    <tr>
+                        <td>Licencia de conducir:</td>
+                        <td>Activa</td>
+                    </tr>
+                </table>
+
+                <table id="localizacion">
+                    <tr>
+                        <td>Domicilio:</td>
+                        <td>Gobernador candiotti 1307</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono:</td>
+                        <td>3462-545399</td>
+                    </tr>
+                </table>
+
+                <table id="contacto">
+                    <tr>
+                        <td>Correo:</td>
+                        <td>https://gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Linkedin:</td>
+                        <td>https://.linkedin.com</td>
+                    </tr>
+                    <tr>
+                        <td>gitHub:</td>
+                        <td>https://github.com/</td>
+                    </tr>
+                </table>

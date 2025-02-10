@@ -1,0 +1,34 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 5;
+    border: 1px solid gray;
+    width: 100%;
+}
+
+.tituloTabla{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.tableConteiner {
+    width: 400px;
+    margin: 5px;
+}
+
+.atributo {
+    font-weight: bold;
+    text-align: left;
+}
+
+.valor {
+    text-align: right;
+}
+
+td{
+    border-bottom: 1px solid black;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
