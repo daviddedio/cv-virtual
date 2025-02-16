@@ -1,7 +1,6 @@
 import './GeneralTable.css'
 
 export const GeneralTable = ({ data , title }) => {
-    console.log(title)
     return (
         <div className='tableConteiner'>
             <h3 className='tituloTabla'>{title}</h3>

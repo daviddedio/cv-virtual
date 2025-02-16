@@ -1,5 +1,7 @@
+import { EstudioPage } from "../pages/estudios/EstudioPage"
+
 export const Estudios = () => {
     return( 
-        <div> Estudios </div>
+        <EstudioPage/>
     )
 }

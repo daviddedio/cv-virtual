@@ -5,7 +5,6 @@ import { Conocimiento } from '../routes/Concimiento'
 import { Cursos } from '../routes/Cursos'
 import { Estudios } from '../routes/Estudios'
 import { Experiencia } from '../routes/Experiencia'
-import { Informacion } from '../routes/Informacion'
 import { InformacionPage } from '../pages/informacion/InformacionPage'
 import './App.css'
 
