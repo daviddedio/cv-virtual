@@ -14,15 +14,19 @@ export const App = () => {
     <>
       <NavBarCv />
       <div className='bigContainer'>
-        <InformacionPage/>
-        <Routes>
-          <Route path='/conocimientos' element={<Conocimiento />} />
-          <Route path='/cursos' element={<Cursos />} />
-          <Route path='/estudios' element={<Estudios />} />
-          <Route path='/experiencia' element={<Experiencia />} />
-          <Route path='/' element={<Estudios />} />
-          <Route path='/*' element={<Navigate to='/estudios'/>} />
-        </Routes>
+        <div className="sidebar" >
+          <InformacionPage />
+        </div>
+        <div className="body" >
+          <Routes className="body" >
+            <Route path='/conocimientos' element={<Conocimiento />} />
+            <Route path='/cursos' element={<Cursos />} />
+            <Route path='/estudios' element={<Estudios />} />
+            <Route path='/experiencia' element={<Experiencia />} />
+            <Route path='/' element={<Estudios />} />
+            <Route path='/*' element={<Navigate to='/estudios' />} />
+          </Routes>
+        </div>
       </div>
     </>
   )

@@ -20,3 +20,13 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.IPimageConteiner>img{
+    width: 200px;
+    margin: 2px;
+}
+
+.IPimageConteiner{
+    display: flex;
+    flex-direction: column;
+}
