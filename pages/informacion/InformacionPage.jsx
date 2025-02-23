@@ -32,7 +32,6 @@ export const InformacionPage = () => {
                 <h2>Imagenes</h2>
                 <div className="IPimageConteiner">
                     <img src="https://scontent.fros6-1.fna.fbcdn.net/v/t1.6435-9/65370959_10218963631790757_6405998598781140992_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGpNN5xuWgHsXJQ2HPjHQqIhLM5ESujdn-EszkRK6N2f7af-gnQiQsGXi1Y7j-reEM&_nc_ohc=gOhDsOSSNVAQ7kNvgGxUUhY&_nc_zt=23&_nc_ht=scontent.fros6-1.fna&_nc_gid=Al_WterBDIfQhXnea7QexEV&oh=00_AYArlo1THq7DGePz2WPOGIXqx7uB9u0doSpH5ZNah88kXg&oe=67DA0385" alt="" />
-                    <img src="https://scontent.fros6-1.fna.fbcdn.net/v/t1.6435-9/82920894_10220779644349936_9001528081139105792_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGQJg70tle7HiJPKSf3_SXzvs4eBNuiXua-zh4E26Je5gw2MsnF98XXGQl4wbrOK5A&_nc_ohc=YCHSmqbKhCAQ7kNvgFnQ9Sd&_nc_zt=23&_nc_ht=scontent.fros6-1.fna&_nc_gid=AmWCSD4xvn1qkBm0QApSV16&oh=00_AYD2zUYWk_9FjSCUk2uQQZ57LrYXLXQcfkv7tDObEQOcGw&oe=67D9F680" alt="" />
                     <img src="https://media.licdn.com/dms/image/v2/D4D22AQFjCtECk4iSmg/feedshare-shrink_800/feedshare-shrink_800/0/1702040901269?e=1742428800&v=beta&t=2_dQDdXBVno3-FZxvnVM4T2RRycz8qDyLBudlHqaOKA" alt="" />
                 </div>
 

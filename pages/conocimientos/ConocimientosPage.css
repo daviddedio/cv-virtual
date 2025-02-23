@@ -1,0 +1,24 @@
+.busquedaConocimientoForm {
+    width: 100%;
+    margin: auto;
+    display: block;
+}
+
+.seleccionCategorias>label{
+    display:block;
+    margin-bottom: 5px;
+}
+
+.buscador{
+    margin: 20px 0px;
+    width: 100%;
+    display: flex;
+}
+
+#Conocimientos{
+    font-size: 21px;
+    width: 250px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}

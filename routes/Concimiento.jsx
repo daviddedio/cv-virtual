@@ -1,5 +1,9 @@
+import { ConocimientosPage } from "../pages/conocimientos/ConocimientosPage"
+
 export const Conocimiento = () => {
     return( 
-        <div> Conocimientos </div>
+        <>
+        <ConocimientosPage/>
+        </>
     )
 }
