@@ -1,0 +1,26 @@
+.knowCardConteinter {
+    width: 30%;
+    height: 150px;
+    margin: 5px;
+    padding: 1px;
+    border: black 1px solid;
+    border-radius: 10px;
+
+}
+
+.knowCardConteinter>h3,p{
+    text-align: center;
+}
+
+.knowCardConteinter>p{
+    font-style: italic;
+    height: 38px;
+}
+
+
+.ratingConteiner{
+display: flex;
+justify-content: center;
+bottom: auto;
+
+}

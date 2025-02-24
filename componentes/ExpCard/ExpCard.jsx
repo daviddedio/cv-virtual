@@ -31,7 +31,7 @@ export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
                 </div>
             </div>
             <div className="cardBody">
-            <button className={toggle} onClick={toggleButtonChange}><i class="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
+            <button className={toggle} onClick={toggleButtonChange}><i className="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
                 <ul className={style}>
                     {Tareas.map(
                         t => <li key={unikey++} className='itemList'>{t.Tarea}</li>

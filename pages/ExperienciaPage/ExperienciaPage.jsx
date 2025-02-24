@@ -10,7 +10,6 @@ export const ExperienciaPage = () => {
         //setEstudios(datosPrueba)
         const temp = datosPrueba.sort((a, b) => b.fInicio.seconds - a.fInicio.seconds)
         setExperiencia(temp)
-        console.log(temp)
     }
 
     useEffect(() => {
