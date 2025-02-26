@@ -1,0 +1,34 @@
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.imagenCurso>img{
+    width: 650px;
+    box-shadow: 10px 10px;
+}
+
+.imagenCurso{
+    position: absolute;
+    z-index: 100;
+    top: 10%;
+    left: 25%;
+}
+
+.loadingImg{
+    position: absolute;
+    font-size: 52px;
+}
+
+
+
+

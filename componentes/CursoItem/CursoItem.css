@@ -1,3 +1,8 @@
+.cursoConteiner:hover{
+    background-color: #04AA6D;
+    color: white;
+}
+
 .datosConteinerCurso {
 padding-left: 10px;
 width: 100%;

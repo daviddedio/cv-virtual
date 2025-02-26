@@ -61,6 +61,7 @@ export const CursoPage = () => {
                             nombre={ite.Nombre}
                             comentarios={ite.Comentarios}
                             informacion={ite.Informacion}
+                            imagen = {ite.FotoDir}
                             key={keyItem++}
                             clase={keyItem%2==0 ? "cursoConteiner" : "cursoConteiner cursoBgGray"}
                         />)

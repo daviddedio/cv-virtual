@@ -1,6 +1,14 @@
+import { useModalContext } from '../modal/context/ModalContext'
 import './CursoItem.css'
 
-export const CursoItem = ({ nombre, comentarios, informacion, clase }) => {
+export const CursoItem = ({ nombre, comentarios, informacion, clase, imagen }) => {
+    const {setState, setImagen} = useModalContext()
+
+    const mostarModal = (img) =>{
+        setImagen(img)
+        setState(true)
+    }
+
     return (
         <div className={clase}>
             <div className="datosConteinerCurso">
@@ -9,7 +17,7 @@ export const CursoItem = ({ nombre, comentarios, informacion, clase }) => {
                 <p className='secondPharagraf'>{comentarios}</p>
             </div>
             <div className="botonConteinerCurso">
-                <button onClick={()=>{alert("hola")}}><i className="fa-solid fa-award"></i></button>
+                <button onClick={()=>mostarModal({imagen})}><i className="fa-solid fa-award"></i></button>
             </div>
         </div>
 

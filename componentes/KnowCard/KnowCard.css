@@ -8,6 +8,11 @@
 
 }
 
+.knowCardConteinter:hover{
+    background-color:#04AA6D ;
+    color: white;
+}
+
 .knowCardConteinter>h3,p{
     text-align: center;
 }

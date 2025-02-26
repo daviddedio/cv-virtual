@@ -6,7 +6,9 @@ import { Cursos } from '../routes/Cursos'
 import { Estudios } from '../routes/Estudios'
 import { Experiencia } from '../routes/Experiencia'
 import { InformacionPage } from '../pages/informacion/InformacionPage'
+import { Modal } from '../componentes/modal/Modal'
 import './App.css'
+
 
 export const App = () => {
 
@@ -28,6 +30,7 @@ export const App = () => {
           </Routes>
         </div>
       </div>
+      <Modal></Modal>
     </>
   )
 }
