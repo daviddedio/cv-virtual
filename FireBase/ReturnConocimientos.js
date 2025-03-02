@@ -1,6 +1,6 @@
 import { getData } from './FireBaseConfig'
 
-export const datos = await getData("Conocimiento")
+//export const datos = await getData("Conocimiento")
 export const datosPrueba = [
     {
         "Categoria": "Computacion",

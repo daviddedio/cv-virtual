@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { datos, datosPrueba } from '../../FireBase/ReturnConocimientos'
+import { datosPrueba } from '../../FireBase/ReturnConocimientos'
 import { KnowCard } from '../../componentes/KnowCard/KnowCard'
 import './ConocimientosPage.css'
 

@@ -1,4 +1,4 @@
-import { datos, datosPrueba } from '../../FireBase/ReturnCursos'
+import {  datosPrueba } from '../../FireBase/ReturnCursos'
 import { useState, useEffect } from 'react'
 import { CursoItem } from '../../componentes/CursoItem/CursoItem'
 import './CursosPage.css'

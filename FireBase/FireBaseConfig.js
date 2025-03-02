@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs} from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, doc, query } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCfriZeFYMUV8YAeo3xmBrkisLNyDCQQsk",
@@ -14,11 +14,24 @@ const firebaseConfig = {
 
 export const db = getFirestore(initializeApp(firebaseConfig));
 
-
-export async function getData(tipo){
+/*export async function getData(tipo){
     const dataCol = collection(db, tipo);
-    const dataSnapshot = await getDocs(dataCol);
-    const dataList = dataSnapshot.docs.map(doc => doc.data());
-    return dataList;
+    const result = await getDocs(dataCol);
+    return getArrayFromCollection(result)
+}*/
+
+export const getData = async (tipo) => {
+    const dataCol = collection(db, tipo)
+    const result = await getDocs(dataCol)
+    //return getArrayFromCollection(result)
+    return result.querySnapShot
 }
+
+export const getArrayFromCollection = (coleccion) => {
+    return coleccion.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+    })
+}
+
+
 

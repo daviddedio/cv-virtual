@@ -24,8 +24,8 @@ export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
                 </div>
             </div>
             <div className="cardBody">
-                <button className={`accordion ${toggle[0]}`} onClick={toggleButtonChange}><i className="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
-                <ul className={`panel ${toggle[1]}`}>
+                <button className={`accordion ${toggle[0]}`} onClick={toggleButtonChange} ><i className="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
+                <ul className={`panel ${toggle[1]}`} >
                     {Tareas.map(
                         t => <li key={unikey++} className='itemList'>{t.Tarea}</li>
                     )}

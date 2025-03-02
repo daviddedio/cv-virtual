@@ -1,23 +1,55 @@
 import { GeneralTable } from "../../componentes/Table/GeneralTable"
-import { datos, datosPrueba } from '../../FireBase/ReturnDatos'
-import { useState, useEffect } from "react"
+import { GeneralTableSkeleton } from "../../componentes/Table/GeneralTableSkeleton";
+import { useState, useRef, useEffect, useContext } from "react";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../FireBase/FireBaseReturnData'
+import {Context} from '../../context/Context'
 import "./InformacionPage.css"
 
 export const InformacionPage = () => {
-
+    //datos
     const [dataInfo, setDataInfo] = useState({})
     const [dataLocalizacion, setDataLocalizacion] = useState({})
     const [dataRedes, setDataRedes] = useState({})
 
-    const cargarInformacion = async () => {
-        setDataInfo(datosPrueba[1])
-        setDataLocalizacion(datosPrueba[0])
-        setDataRedes(datosPrueba[2])
+    //estados
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const fetchedRef = useRef(false); // Controla si ya se hizo la petición
+
+    const {informacion} = useContext(Context)
+
+    const getDataFromFirebase = async () => {
+        if(informacion){
+            setDataInfo(informacion)
+            console.log('info cargada desde context')
+            return
+        }
+        
+        setLoading(true)
+
+        try {
+            const querySnapshot = await getDocs(collection(db, "InfoPersonal"));
+            const data = querySnapshot.docs.map(doc => doc.data())
+            setData(data)
+            setDataInfo(data[1])
+            setDataLocalizacion(data[0])
+            setDataRedes(data[2])
+        } catch (error) {
+            setError(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
-        cargarInformacion()
+        getDataFromFirebase()
     }, [])
+
+    if (error) {
+        return <p>Error</p>
+    }
 
     return (
         <div className="infoConteiner">
@@ -25,9 +57,20 @@ export const InformacionPage = () => {
                 <div className="imgConteiner">
                     <img className="imgPhoto" src="https://media.licdn.com/dms/image/v2/C4D03AQE_LBZZGaTIjw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1524490233489?e=1744848000&v=beta&t=HBLUMzvA70WgAOHynJDLNEM5Pv3-rgJvQ7xnKrHAR4w" alt="" />
                 </div>
-                <GeneralTable data={dataInfo} title="Informacion General" />
-                <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
-                <GeneralTable data={dataRedes} title={"Redes"} />
+                {
+                    loading ?
+                    <>
+                    <GeneralTableSkeleton title={"Informacion General"} count={5}/>
+                    <GeneralTableSkeleton title={"Informacion de contacto"} count={3}/>
+                    <GeneralTableSkeleton title={"Redes"} count={2}/>
+                    </>
+                    :
+                    <>
+                    <GeneralTable data={dataInfo} title={"Informacion General"} />
+                    <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
+                    <GeneralTable data={dataRedes} title={"Redes"} />
+                    </>
+                }
                 <hr />
                 <h2>Imagenes</h2>
                 <div className="IPimageConteiner">

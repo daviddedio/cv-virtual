@@ -1,6 +1,6 @@
 import { getData } from './FireBaseConfig'
 
-export const datos = await getData("Experiencia")
+//export const datos = await getData("Experiencia")
 export const datosPrueba = [
     {
         "Resumen": "desde 5/12/2022 hasta la actualidad",

@@ -1,7 +1,7 @@
 import { getData } from './FireBaseConfig'
 
-export const datos = await getData("InfoPersonal")
-export const datosPrueba = [
+export const datos = getData("InfoPersonal")
+/*export const datosPrueba = [
     {
         "Domicilio": "Gobernador Candiotti 1307",
         "Telefono": "3462 545399",
@@ -18,4 +18,4 @@ export const datosPrueba = [
         "Linkedin": "www.linkedin.com",
         "GitHub": "www.gitHub.com"
     }
-]
+]*/
