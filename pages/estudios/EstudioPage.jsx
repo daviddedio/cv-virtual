@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { datosPrueba } from '../../FireBase/ReturEstudios'
-import {Context} from '../../context/Context'
-import { SchoolCard } from '../../componentes/SchoolCard/SchoolCard';
+import { SchoolCard, SchoolCardLoading } from '../../componentes/SchoolCard/SchoolCard';
+import { Context } from '../../context/Context'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import './EstudioPage.css'
@@ -25,7 +25,7 @@ export const EstudioPage = () => {
         try {
             const querySnapshot = await getDocs(collection(db, "Estudios"));
             const data = querySnapshot.docs.map(doc => doc.data())
-            setData(data.sort((a,b) => b.Orden - a.Orden))
+            setData(data.sort((a, b) => b.Orden - a.Orden))
             setEstudios(data)
             setEstudiosContext(data)
             console.log('From hook')
@@ -47,13 +47,16 @@ export const EstudioPage = () => {
 
     return (
         <div className="SchollCardConteiner"> {
-            estudios.map(est => <SchoolCard
-                Nombre={est.Nombre}
-                Universidad={est.Universidad}
-                info={est.Info}
-                key={est.Orden}
-                Imagen={est.Imagen}
-            />)
+            loading ?
+                Array.from({ length: 6 }).map((it, index) => <SchoolCardLoading />)
+                :
+                estudios.map(est => <SchoolCard
+                    Nombre={est.Nombre}
+                    Universidad={est.Universidad}
+                    info={est.Info}
+                    key={est.Orden}
+                    Imagen={est.Imagen}
+                />)
         }
         </div>
     )

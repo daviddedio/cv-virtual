@@ -10,9 +10,9 @@ export const GeneralTableSkeleton = ({ title, count }) => {
                 <tbody>
                     {
                         Array.from({ length: count }).map((it, index) =>
-                                <tr key={index} className="">
+                                <tr key={'keyTable' + index.toString()} className="">
                                     <td className="satributo skeleton">Loading...</td>
-                                    <td className="svalor skeleton">{index}</td>
+                                    <td className="svalor skeleton"></td>
                                 </tr>)
                     }
 

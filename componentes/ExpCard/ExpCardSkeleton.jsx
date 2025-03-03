@@ -5,7 +5,7 @@ export const ExpCardSkeleton = ({clave}) => {
         <div className="exptCard " key={clave}>
             <div className="expHeader">
                 <div className='sECimgConteiner skeleton'>
-                    <img className='skeleton-box-img skeleton'/>
+                    <img className='skeleton-box-img skeleton' src='../../src/assets/circleSpinnWhite.svg' />
                 </div>
                 <div className='sECdataConteiner skeleton'>
                     <h2 className='skeleton-title skeleton'>Loading...</h2>

@@ -24,6 +24,10 @@ body {
     background-color: #04AA6D;
 }
 
+.login{
+    float: left;
+}
+
 @media screen and (max-width: 500px) {
     .navbar span{
         display: none;
