@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './NavBarCv.css'
 
 export const NavBarCv = () => {
@@ -18,9 +18,9 @@ export const NavBarCv = () => {
         act === 'conocimiento' ? setConocimiento('activo') : setConocimiento('no')
     }
 
-    function start() {
-        activar("estudio")
-    }
+    useEffect(()=>{
+        activar('estudio')
+    },[])
 
     return (
         <div className="navbar">

@@ -11,8 +11,14 @@ table {
 }
 
 .tableConteiner {
-    width: 400px;
-    margin: 5px;
+    width: 500px;
+    margin: auto;    
+}
+
+.tableConteiner>table {
+    width: 100%;
+    font-size: 18px;
+
 }
 
 .atributo {

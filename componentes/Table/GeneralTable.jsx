@@ -3,7 +3,7 @@ import './GeneralTable.css'
 export const GeneralTable = ({ data , title }) => {
     return (
         <div className='tableConteiner'>
-            <h3 className='tituloTabla'>{title}</h3>
+            <h2 className='tituloTabla'>{title}</h2>
             <table>
                 <tbody>
                     {Object.entries(data).map(([key, value], index) => (

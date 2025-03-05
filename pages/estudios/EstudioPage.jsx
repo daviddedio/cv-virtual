@@ -48,7 +48,7 @@ export const EstudioPage = () => {
     return (
         <div className="SchollCardConteiner"> {
             loading ?
-                Array.from({ length: 6 }).map((it, index) => <SchoolCardLoading />)
+                Array.from({ length: 6 }).map((it, index) => <SchoolCardLoading key={index}/>)
                 :
                 estudios.map(est => <SchoolCard
                     Nombre={est.Nombre}

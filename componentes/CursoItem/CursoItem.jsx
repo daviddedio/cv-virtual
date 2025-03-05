@@ -1,11 +1,13 @@
 import { useModalContext } from '../modal/context/ModalContext'
+import { ImagenComponent } from '../ImagenComponent/ImagenComponent'
 import './CursoItem.css'
 
 export const CursoItem = ({ nombre, comentarios, informacion, clase, imagen }) => {
-    const {setState, setImagen} = useModalContext()
+    const {setComponente, setState} = useModalContext()
 
-    const mostarModal = (img) =>{
-        setImagen(img)
+    const mostarModal = (reactComponent) =>{
+        console.log(reactComponent)
+        setComponente(reactComponent)
         setState(true)
     }
 
@@ -17,7 +19,7 @@ export const CursoItem = ({ nombre, comentarios, informacion, clase, imagen }) =
                 <p className='secondPharagraf'>{comentarios}</p>
             </div>
             <div className="botonConteinerCurso">
-                <button onClick={()=>mostarModal({imagen})}><i className="fa-solid fa-award"></i></button>
+                <button onClick={()=>mostarModal(<ImagenComponent imagen={imagen}/>)}><i className="fa-solid fa-award"></i></button>
             </div>
         </div>
 

@@ -14,11 +14,15 @@ export const App = () => {
 
   return (
     <>
-      <NavBarCv />
+    <div className="headerCV">
+      <img src="/src/assets/react.svg" alt="csa" />
+      <h1>Curriculum Virtual</h1>
+    </div>
+      <div className="sidebar" >
+        <InformacionPage />
+      </div>
       <div className='bigContainer'>
-        <div className="sidebar" >
-          <InformacionPage />
-        </div>
+      <NavBarCv />
         <div className="body" >
           <Routes className="body" >
             <Route path='/conocimientos' element={<Conocimiento />} />
@@ -30,7 +34,7 @@ export const App = () => {
           </Routes>
         </div>
       </div>
-      <Modal></Modal>
+      <Modal />
     </>
   )
 }

@@ -4,8 +4,8 @@ export const ModalContext=createContext({state:false, setState:()=>null})
 
 export const ModalProvider = ({children}) => {
     const [state, setState] = useState(false)
-    const [imagen, setImagen] = useState('')
-    return(<ModalContext.Provider value={{state, setState, imagen, setImagen}}>{children}</ModalContext.Provider>)
+    const [componente, setComponente] = useState('')
+    return(<ModalContext.Provider value={{state, setState,componente, setComponente}}>{children}</ModalContext.Provider>)
 }
 
 export const useModalContext = ()=>{

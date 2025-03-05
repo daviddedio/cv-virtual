@@ -26,7 +26,10 @@
 
 .loadingImg{
     position: absolute;
-    font-size: 52px;
+    margin: auto;
+}
+.modalx{
+    border: 1px solid black;
 }
 
 
