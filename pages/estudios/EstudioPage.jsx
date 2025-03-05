@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from 'react';
-import { datosPrueba } from '../../FireBase/ReturEstudios'
 import { SchoolCard, SchoolCardLoading } from '../../componentes/SchoolCard/SchoolCard';
 import { Context } from '../../context/Context'
 import { collection, getDocs } from 'firebase/firestore';
