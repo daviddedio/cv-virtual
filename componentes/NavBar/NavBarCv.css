@@ -24,12 +24,34 @@ body {
     background-color: #04AA6D;
 }
 
-.login{
-    float: left;
+.login-container {
+    float: right;
 }
 
-@media screen and (max-width: 500px) {
-    .navbar span{
-        display: none;
-    }
+input[type=text] {
+    padding: 6px;
+    font-size: 17px;
+    margin-top: 8px;
+    margin-left: 2px;
+    border: none;
+    width: 200px;
 }
+
+.login-container button:hover {
+    background-color: green;
+}
+
+.login-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background-color: #555;
+    color: white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.Invisible{display: none;}
+.Visible{display: block;}

@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { CursoItem } from '../../componentes/CursoItem/CursoItem'
-import { CursoItemSkeleton } from '../../componentes/CursoItem/CursoItemSkeleton';
+import { CursoItem, CursoItemSkeleton } from '../../componentes/CursoItem/CursoItem'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import {Context} from '../../context/Context'

@@ -1,9 +1,9 @@
-import { UpdateInformacionPage } from "../pages/UpdateInformacion/UpdateInformacionPage"
+import { CargarDatosPage } from "../pages/CargarDatosPage/CargarDatosPage"
 
 export const UpdateInformacion = () => {
     return (
         <>
-            <UpdateInformacionPage/>
+            <CargarDatosPage/>
         </>
     )
 }

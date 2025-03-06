@@ -7,9 +7,10 @@ export const Provider = ({children}) => {
     const [estudiosContext, setEstudiosContext] = useState('')
     const [cursosContext, setCursosContext] = useState('')
     const [conocimientosContext, setConocimientosContext] = useState('')
+    const [login, setLogin] = useState(false)
 
     return (
-        <Context.Provider value={{informacionContext, setInformacionContext, experienciaContext, setExperienciaContext, estudiosContext, setEstudiosContext, cursosContext, setCursosContext, conocimientosContext, setConocimientosContext}}>
+        <Context.Provider value={{informacionContext, setInformacionContext, experienciaContext, setExperienciaContext, estudiosContext, setEstudiosContext, cursosContext, setCursosContext, conocimientosContext, setConocimientosContext, login, setLogin}}>
             {children}
         </Context.Provider>
     )

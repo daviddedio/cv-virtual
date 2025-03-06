@@ -11,3 +11,15 @@ export const KnowCard = ({ con, nivel, info }) => {
         </div>
     )
 }
+
+export const KnowCardSkeleton = () => {
+    return (
+        <div className='knowCardConteinters skeleton'>
+            <h3></h3>
+            <p></p>
+            <div className="ratingConteiners skeleton">
+                <HalfRating puntos={0} />
+            </div>
+        </div>
+    )
+}

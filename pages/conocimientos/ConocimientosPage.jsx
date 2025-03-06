@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { KnowCard } from '../../componentes/KnowCard/KnowCard'
-import { KnowCardSkeleton } from '../../componentes/KnowCard/KnowCardSkeleton';
+import { KnowCard, KnowCardSkeleton } from '../../componentes/KnowCard/KnowCard'
 import { Context } from '../../context/Context'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'

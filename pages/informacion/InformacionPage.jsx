@@ -1,5 +1,4 @@
-import { GeneralTable } from "../../componentes/Table/GeneralTable"
-import { GeneralTableSkeleton } from "../../componentes/Table/GeneralTableSkeleton";
+import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/GeneralTable"
 import { useState, useRef, useEffect, useContext } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'

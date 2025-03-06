@@ -1,6 +1,5 @@
-import { ExpCard } from '../../componentes/ExpCard/ExpCard'
-import { ExpCardSkeleton } from '../../componentes/ExpCard/ExpCardSkeleton'
-import { useState, useRef, useEffect, useContext } from "react";
+import { ExpCard, ExpCardSkeleton } from '../../componentes/ExpCard/ExpCard'
+import { useState, useEffect, useContext } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import {Context} from '../../context/Context'
@@ -17,16 +16,16 @@ export const ExperienciaPage = () => {
     const getDataFromFirebase = async () => {
         if (experienciaContext){
             setExperiencia(experienciaContext)
-            console.log('from Context')
             return
         }
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Experiencia"));
-            const data = querySnapshot.docs.map(doc => doc.data())
+            const data = querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
             setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
             setExperiencia(data)
             setExperienciaContext(data)
+            console.log(data)
             console.log('From hook')
         } catch (error) {
             setError(error)
@@ -57,6 +56,7 @@ export const ExperienciaPage = () => {
                     Tareas={exp.Tareas}
                     Imagen={exp.Imagen}
                     key={exp.fInicio.seconds}
+                    place={exp.id}
                 />)
             }
         </div>
