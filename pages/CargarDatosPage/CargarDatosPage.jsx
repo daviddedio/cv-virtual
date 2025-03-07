@@ -1,5 +1,9 @@
-import { useState } from 'react'
-import {InformacionForm, EstudiosForm, ExperienciaForm, CursoForm, ConocimientoForm} from '../../componentes/Formularios/Formulario'
+import { useEffect, useState } from 'react'
+import {FormInformacion} from '../../componentes/Formularios/FormInformacion'
+import {FormConocimiento} from '../../componentes/Formularios/FormConocimiento'
+import {FormCursos} from '../../componentes/Formularios/FormCursos'
+import {FormEstudios} from "../../componentes/Formularios/FormEstudios"
+import {FormExperiencia} from '../../componentes/Formularios/FormExperiencia'
 import './CargarDatosPage.css'
 
 export const CargarDatosPage = () => {
@@ -18,6 +22,10 @@ export const CargarDatosPage = () => {
         Opcion === "conocimiento" ? setConocimiento(['active','block']) : setConocimiento('')
     }
 
+    useEffect(()=>{
+        Activar('informacion')
+    },[])
+
     return (
         <>
             <h2>Seleccionar Menú</h2>
@@ -31,28 +39,27 @@ export const CargarDatosPage = () => {
             </div>
 
             <div id="Informacion" className={`tabcontent ${informacion[1]}`}>
-                <h3>Informacion</h3>
-                <InformacionForm/>
+                <FormInformacion/>
             </div>
 
             <div id="Estudios" className={`tabcontent ${estudios[1]}`}>
                 <h3>Paris</h3>
-                <EstudiosForm/>
+                <FormEstudios/>
             </div>
 
             <div id="Experiencia" className={`tabcontent ${experiencia[1]}`}>
                 <h3>Tokyo</h3>
-                <ExperienciaForm />
+                <FormExperiencia />
             </div>
 
             <div id="Curso" className={`tabcontent ${curso[1]}`}>
                 <h3>Curso</h3>
-                <CursoForm/>
+                <FormCursos/>
             </div>
 
             <div id="Conocimiento" className={`tabcontent ${conocimiento[1]}`}>
                 <h3>Conocimiento</h3>
-                <ConocimientoForm/>
+                <FormConocimiento/>
             </div>
         </>
     )

@@ -52,8 +52,8 @@ export const NavBarCv = () => {
 
             <div className="login-container">
                 <form action="" className={visible[0]}>
-                    <input type="text" placeholder="Username" name="username" onChange={() => crearFormulario()} />
-                    <input type="text" placeholder="Password" name="psw" />
+                    <input className="InputFormNavBar" type="text" placeholder="Username" name="username" onChange={() => crearFormulario()} />
+                    <input className="InputFormNavBar" type="text" placeholder="Password" name="psw" />
                     <button onClick={(e) => { doRequest(e, ['Invisible', 'Visible']) }}>LogIn</button>
                 </form>
                 <form action="" className={visible[1]}>
