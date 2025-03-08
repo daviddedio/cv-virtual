@@ -25,8 +25,6 @@ export const ExperienciaPage = () => {
             setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
             setExperiencia(data)
             setExperienciaContext(data)
-            console.log(data)
-            console.log('From hook')
         } catch (error) {
             setError(error)
         } finally {

@@ -5,10 +5,10 @@ import './ExpCard.css'
 export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
     var unikey = 1
 
-    const [toggle, setToggle] = useState(['',''])
+    const [toggle, setToggle] = useState(['', ''])
 
     const toggleButtonChange = () => {
-        if (toggle[0] === '') {setToggle(['activ','longer'])} else {setToggle(['',''])}
+        if (toggle[0] === '') { setToggle(['activ', 'longer']) } else { setToggle(['', '']) }
     }
 
     return (
@@ -25,17 +25,19 @@ export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
             </div>
             <div className="cardBody">
                 <button className={`accordion ${toggle[0]}`} onClick={toggleButtonChange} ><i className="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
-                <ul className={`panel ${toggle[1]}`} >
-                    {Tareas.map(
-                        t => <li key={unikey++} className='itemList'>{t.Tarea}</li>
-                    )}
-                </ul>
+                <div className={`panel ${toggle[1]}`}>
+                    <ul >
+                        {Tareas.map(
+                            t => <li key={unikey++} className='itemList'>{t.Tarea}</li>
+                        )}
+                    </ul>
+                </div>
             </div>
         </div>
     )
 }
 
-export const ExpCardSkeleton = ({clave}) => {
+export const ExpCardSkeleton = ({ clave }) => {
     return (
         <div className="exptCard " key={clave}>
             <div className="expHeader">

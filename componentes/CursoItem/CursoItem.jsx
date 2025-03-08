@@ -6,7 +6,6 @@ export const CursoItem = ({ nombre, comentarios, informacion, clase, imagen }) =
     const {setComponente, setState} = useModalContext()
 
     const mostarModal = (reactComponent) =>{
-        console.log(reactComponent)
         setComponente(reactComponent)
         setState(true)
     }

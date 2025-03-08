@@ -16,16 +16,14 @@ body {
     font-size: 17px;
 }
 
-/*.navbar a:hover {
-    background-color: #000;
-}*/
-
 .active {
     background-color: #04AA6D;
 }
 
 .login-container {
     float: right;
+    display: flex;
+    align-items: center;
 }
 
 .InputFormNavBar {
@@ -37,21 +35,35 @@ body {
     width: 200px;
 }
 
-.login-container button:hover {
-    background-color: green;
-}
 
-.login-container button {
+.btnLogIn {
     float: right;
     padding: 6px 10px;
     margin-top: 8px;
     margin-right: 16px;
-    background-color: #555;
+    background-color: green;
     color: white;
     font-size: 17px;
     border: none;
     cursor: pointer;
 }
 
-.Invisible{display: none;}
-.Visible{display: block;}
+.btnLogOut{
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background-color: red;
+    color: white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.Invisible{
+    display: none;
+}
+
+.Visible{
+    display: block;
+}

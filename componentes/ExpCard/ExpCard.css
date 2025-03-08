@@ -47,6 +47,7 @@
     outline: none;
     font-size: 15px;
     transition: 0.4s;
+    cursor: pointer;
 }
 
 .accordion:hover {
@@ -66,8 +67,7 @@
 }
 
 .panel {
-    margin-left: 10px;
-    padding: 0 1px;
+    margin: 5px;
     background-color: white;
     max-height: 0;
     overflow: hidden;
@@ -75,7 +75,8 @@
 }
 
 .longer{
-    max-height: fit-content;
+    display: block;
+    max-height: 500px;
 }
 
 .cardBody>button{
@@ -134,18 +135,4 @@
     text-align: left;
 }
 
-
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.6;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
 

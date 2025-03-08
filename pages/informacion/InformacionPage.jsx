@@ -2,7 +2,7 @@ import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/Gene
 import { useState, useRef, useEffect, useContext } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
-import {Context} from '../../context/Context'
+import { Context } from '../../context/Context'
 import "./InformacionPage.css"
 
 export const InformacionPage = () => {
@@ -17,24 +17,28 @@ export const InformacionPage = () => {
     const [error, setError] = useState(null);
     const fetchedRef = useRef(false); // Controla si ya se hizo la petición
 
-    const {informacion} = useContext(Context)
+    const { informacion, infoContextContacto, setInfoContextContacto, infoContextInicial, setInfoContextInicial, infoContextRedes, setInfoContextRedes } = useContext(Context)
 
     const getDataFromFirebase = async () => {
-        if(informacion){
+        if (informacion) {
             setDataInfo(informacion)
             console.log('info cargada desde context')
             return
         }
-        
+
         setLoading(true)
 
         try {
             const querySnapshot = await getDocs(collection(db, "InfoPersonal"));
             const data = querySnapshot.docs.map(doc => doc.data())
-            setData(data)
+            //setData(data)
             setDataInfo(data[1])
             setDataLocalizacion(data[0])
             setDataRedes(data[2])
+
+            setInfoContextContacto(data[0])
+            setInfoContextInicial(data[1])
+            setInfoContextRedes(data[2])
         } catch (error) {
             setError(error)
         } finally {
@@ -58,17 +62,17 @@ export const InformacionPage = () => {
                 </div>
                 {
                     loading ?
-                    <>
-                    <GeneralTableSkeleton title={"Informacion General"} count={5}/>
-                    <GeneralTableSkeleton title={"Informacion de contacto"} count={3}/>
-                    <GeneralTableSkeleton title={"Redes"} count={2}/>
-                    </>
-                    :
-                    <>
-                    <GeneralTable data={dataInfo} title={"Informacion General"} />
-                    <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
-                    <GeneralTable data={dataRedes} title={"Redes"} />
-                    </>
+                        <>
+                            <GeneralTableSkeleton title={"Informacion General"} count={5} />
+                            <GeneralTableSkeleton title={"Informacion de contacto"} count={3} />
+                            <GeneralTableSkeleton title={"Redes"} count={2} />
+                        </>
+                        :
+                        <>
+                            <GeneralTable data={dataInfo} title={"Informacion General"} />
+                            <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
+                            <GeneralTable data={dataRedes} title={"Redes"} />
+                        </>
                 }
                 <hr />
                 {/*<h2>Imagenes</h2>

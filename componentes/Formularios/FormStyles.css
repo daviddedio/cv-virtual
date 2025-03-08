@@ -1,5 +1,5 @@
 .FormInputUpdate {
-    width:100%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -19,8 +19,13 @@
     cursor: pointer;
 }
 
-.btnSubmit:hover {
-    background-color: #45a049;
+.uploading {
+    background-color: yellow;
+    color: black;
+}
+
+.uploadingError {
+    background-color: red;
 }
 
 .FormInputUpdateCheck {
@@ -33,3 +38,11 @@
     background-color: #f2f2f2;
     padding: 20px;
 }*/
+
+.formHeader {
+    display: flex;
+}
+
+.formHeader>h2{
+    width: 100%;
+}
