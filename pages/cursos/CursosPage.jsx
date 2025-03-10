@@ -3,6 +3,7 @@ import { CursoItem, CursoItemSkeleton } from '../../componentes/CursoItem/CursoI
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import {Context} from '../../context/Context'
+import { Buscador, BuscadorSkeleton } from '../../componentes/Buscador/Buscador';
 import './CursosPage.css'
 
 export const CursoPage = () => {
@@ -27,7 +28,6 @@ export const CursoPage = () => {
     }
 
     function filtrarCurso(dato) {
-        console.log(dato)
         if (dato === "todo") {
             setItem(cursos)
         } else {
@@ -38,24 +38,22 @@ export const CursoPage = () => {
 
     const getDataFromFirebase = async () => {
         if (cursosContext) {
+            cargarCategorias(cursosContext)
             setItem(cursosContext)
             setCursos(cursosContext)
-            cargarCategorias(cursosContext)
-            console.log('from Context')
             return
         }
+        
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Cursos"));
             const data = querySnapshot.docs.map(doc => doc.data())
             setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds))
+            cargarCategorias(data)
             setItem(data)
             setCursos(data)
             setCursosContext(data)
-            cargarCategorias(data)
-            console.log('From hook')
         } catch (error) {
-            console.log(error)
             setError(error)
         } finally {
             setLoading(false)
@@ -72,20 +70,10 @@ export const CursoPage = () => {
 
     return (
         <>
-            <div className="buscadorCurso">
-                <div className="seleccionCategorias">
-                    <label htmlFor="Cursos">Seleccionar categoria:</label>
-                    <select name="Cursos" id="Cursos" onChange={e => filtrarCurso(e.target.value)}>
-                        <option value="todo">...</option>
-                        {
-                            categorias.map((itm) =>
-                                <option value={itm} key={itm}>{itm}</option>
-                            )
-                        }
-                    </select>
-                </div>
-                <p>{item.length} Selecciones</p>
-            </div>
+            {
+            
+            loading ? <BuscadorSkeleton/> : <Buscador cat={categorias} filtro={filtrarCurso}/>
+            }
             <div className='informacionCursos'>
                 <div>
                     {   loading ?
