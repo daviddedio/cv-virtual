@@ -60,8 +60,8 @@ export const NavBarCv = () => {
         }
 
         //Este fragmento debe comentarse
-        setLogin(!login)
-        setVisible(arr)
+        /*setLogin(!login)
+        setVisible(arr)*/
     }
 
     const logOut = (e, arr) => {
