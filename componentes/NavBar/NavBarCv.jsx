@@ -41,8 +41,8 @@ export const NavBarCv = () => {
 
     const logIn = async (e, arr) => {
         e.preventDefault()
-        console.log('corregir el login file 44 NavBarCV')
-        /*setLoading(true)
+        //console.log('corregir el login file 44 NavBarCV')
+        setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Login"));
             const data = querySnapshot.docs.map(doc => doc.data())
@@ -57,7 +57,7 @@ export const NavBarCv = () => {
             mostrarModal(error, 2)
         } finally {
             setLoading(false)
-        }*/
+        }
 
         //Este fragmento debe comentarse
         setLogin(!login)
