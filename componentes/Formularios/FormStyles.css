@@ -1,12 +1,37 @@
-.FormInputUpdate {
+.formEditData>input[type=text], input[type=file], input[type=date] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 1px solid black;
     border-radius: 4px;
     box-sizing: border-box;
+    font-style: italic;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.formEditData>input[type=checkbox]{
+    /*width: 100%;*/
+    padding: 12x 20px;
+    margin-bottom: 22px;
+    display: inline-block;
+}
+
+.formEditData>label{
+    font-weight: bold;
+    font-size: 21px;
+}
+
+/*.formEditData>checkbox {
+    margin: 10px;
+    transform: scale(1.5);
+}*/
 
 .btnSubmit {
     width: 100%;
@@ -28,21 +53,22 @@
     background-color: red;
 }
 
-.FormInputUpdateCheck {
-    margin: 10px;
-    transform: scale(1.5);
-}
-
-/*div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}*/
-
-.formHeader {
-    display: flex;
-}
-
 .formHeader>h2{
     width: 100%;
+    text-align: center;
+}
+
+.displayForm{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.displayImageFromDataBase{
+    width: auto;
+    border: 1px solid black;
+}
+
+.selectorDeImagen,.imagenFromDataBase{
+    text-align: center;
 }

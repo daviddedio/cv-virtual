@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
-import { Buscador, BuscadorSkeleton } from "../Buscador/Buscador";
+import { DataRow } from "../DataRow/DataRow";
 
 export const FormExperiencia = () => {
 
@@ -12,8 +12,11 @@ export const FormExperiencia = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    //datos del contexto
     const { experienciaContext, setExperienciaContext } = useContext(Context)
 
+    //obtener datos
     const getDataFromFirebase = async () => {
         if (experienciaContext) {
             setExperiencia(experienciaContext)
@@ -22,7 +25,7 @@ export const FormExperiencia = () => {
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Experiencia"));
-            const data = querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
+            const data = querySnapshot.docs.map(doc => Object.assign({ Id: doc.id }, doc.data()))
             setData(data.sort((a, b) => b.fInicio.seconds - a.fInicio.seconds))
             setExperiencia(data)
             setExperienciaContext(data)
@@ -37,18 +40,17 @@ export const FormExperiencia = () => {
         getDataFromFirebase()
     }, [])
 
-    const filtrar = ()=>{
-        console.log("filtrando")
-    }
-
+    var nro = 1
 
     return (
         <>
-            <div className="dataConteiner">
-                {
-
-                }
+            <div className="formHeader">
+                <h2>Actualizar Informacion General, contacto y redes</h2>
             </div>
+            <hr />
+            {
+                loading ? <p>Cargando</p> : experiencia.map(exp=><DataRow obj={exp} nombre={exp.Empresa} key={nro++}/>)
+            }
         </>
     )
 }

@@ -21,7 +21,7 @@ export const ExperienciaPage = () => {
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Experiencia"));
-            const data = querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
+            const data = querySnapshot.docs.map(doc => Object.assign({Id:doc.id},doc.data()))
             setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
             setExperiencia(data)
             setExperienciaContext(data)

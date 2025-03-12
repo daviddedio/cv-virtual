@@ -23,7 +23,7 @@ export const EstudioPage = () => {
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Estudios"));
-            const data = querySnapshot.docs.map(doc => doc.data())
+            const data = querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
             setData(data.sort((a, b) => b.Orden - a.Orden))
             setEstudios(data)
             setEstudiosContext(data)

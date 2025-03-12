@@ -9,7 +9,7 @@ import './FormStyles.css'
 
 export const FormInformacion = () => {
     const { infoContextContacto, infoContextInicial, infoContextRedes } = useContext(Context)
-    const { setComponente, setState } = useModalContext()
+    const {setComponente, setState} = useModalContext()
 
     const [inputForm, setInputForm] = useState({
         nombre: infoContextInicial['Nombre'],
@@ -28,11 +28,6 @@ export const FormInformacion = () => {
 
     const actualizarDatos = ({ target }) => {
         const { name, value, type, checked } = target
-        /*console.log("Nombre:", name);
-        console.log("Tipo:", type);
-        console.log("Valor:", value);
-        console.log("Checked:", checked);*/
-
         setInputForm({
             ...inputForm, [name]: type === 'checkbox' ? (checked ? "Activa" : "No activa") : value
         })
@@ -85,45 +80,48 @@ export const FormInformacion = () => {
 
     return (
         <>
-            <div className="formHeader">
+        <div className="formHeader">
                 <h2>Actualizar Informacion General, contacto y redes</h2>
             </div>
 
             <hr />
-            <form onSubmit={cargarDatos}>
+        <div className="displayForm">
+            <form onSubmit={cargarDatos} className="formEditData">
                 <label htmlFor="nombre">Nombre</label>
-                <input className="FormInputUpdate" type="text" id="nombre" name="nombre" value={nombre} placeholder="Ingresar Nombre" onChange={actualizarDatos} />
+                <input type="text" id="nombre" name="nombre" value={nombre} placeholder="Ingresar Nombre" onChange={actualizarDatos}></input>
 
                 <label htmlFor="nacimiento">Fecha de nacimiento</label>
-                <input className="FormInputUpdate" type="text" id="nacimiento" name="nacimiento" placeholder="Ingresar Fecha de nacimiento toString()" value={nacimiento} onChange={actualizarDatos} />
+                <input type="text" id="nacimiento" name="nacimiento" placeholder="Ingresar Fecha de nacimiento toString()" value={nacimiento} onChange={actualizarDatos} />
 
                 <label htmlFor="estado">Estado</label>
-                <input className="FormInputUpdate" type="text" id="estado" name="estado" placeholder="Casado - Soltero - Concubinato" value={estado} onChange={actualizarDatos} />
+                <input type="text" id="estado" name="estado" placeholder="Casado - Soltero - Concubinato" value={estado} onChange={actualizarDatos} />
 
                 <label htmlFor="nacionalidad">Nacionalidad</label>
-                <input className="FormInputUpdate" type="text" id="nacionalidad" name="nacionalidad" placeholder="Argentino - Chileno - Colombiano - Brasilero ..." value={nacionalidad} onChange={actualizarDatos} />
+                <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Argentino - Chileno - Colombiano - Brasilero ..." value={nacionalidad} onChange={actualizarDatos} />
 
                 <label htmlFor="conducir">Licencia de conducir</label>
-                <input className="FormInputUpdateCheck" type="checkbox" id="conducir" name="conducir" checked={conducir === "Activa" ? true : false} onChange={actualizarDatos} />
+                <input type="checkbox" id="conducir" name="conducir" checked={conducir === "Activa" ? true : false} onChange={actualizarDatos} />
                 <div />
 
                 <label htmlFor="domicilio">Domicilio</label>
-                <input className="FormInputUpdate" type="text" id="domicilio" name="domicilio" placeholder="Ingresar calle y nro de domicilio" value={domicilio} onChange={actualizarDatos} />
+                <input type="text" id="domicilio" name="domicilio" placeholder="Ingresar calle y nro de domicilio" value={domicilio} onChange={actualizarDatos} />
 
                 <label htmlFor="telefono">Telefono</label>
-                <input className="FormInputUpdate" type="text" id="telefono" name="telefono" placeholder="Ingresar telefono fijo y/o celular" value={telefono} onChange={actualizarDatos} />
+                <input type="text" id="telefono" name="telefono" placeholder="Ingresar telefono fijo y/o celular" value={telefono} onChange={actualizarDatos} />
 
                 <label htmlFor="email">e-mail</label>
-                <input className="FormInputUpdate" type="text" id="email" name="email" placeholder="Ingresar un correo electronico" value={email} onChange={actualizarDatos} />
+                <input type="text" id="email" name="email" placeholder="Ingresar un correo electronico" value={email} onChange={actualizarDatos} />
 
                 <label htmlFor="linkedin">Linkedin direccion</label>
-                <input className="FormInputUpdate" type="text" id="linkedin" name="linkedin" placeholder="Agregar el link de linkedin para tu perfil" value={linkedin} onChange={actualizarDatos} />
+                <input type="text" id="linkedin" name="linkedin" placeholder="Agregar el link de linkedin para tu perfil" value={linkedin} onChange={actualizarDatos} />
 
                 <label htmlFor="github">gitHub direccion</label>
-                <input className="FormInputUpdate" type="text" id="github" name="github" placeholder="Agregar el link de linkedin para tu perfil" value={github} onChange={actualizarDatos} />
+                <input type="text" id="github" name="github" placeholder="Agregar el link de linkedin para tu perfil" value={github} onChange={actualizarDatos} />
 
                 <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />
             </form>
+        </div>
+            
         </>
     )
 }
