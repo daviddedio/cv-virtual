@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
-import { DataRow } from "../DataRow/DataRow";
+import { DataRow } from "../DataRow/DataRow"
+import { InterFormExperiencia } from "../FormulariosInternos/Experiencia/InterFormExperiencia";
 
 export const FormExperiencia = () => {
 
@@ -12,7 +13,18 @@ export const FormExperiencia = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [btnToggle, setBtnToggle] = useState(['btnToggleActive', 'btnToggle'])
+    const [newDataForm, setNewDataForm] = useState(true)
 
+    const switchToggle = ()=>{
+        if(btnToggle[0] == 'btnToggleActive'){
+            setBtnToggle(['btnToggle', 'btnToggleActive'])
+            setNewDataForm(false)
+        }else{
+            setBtnToggle(['btnToggleActive', 'btnToggle'])
+            setNewDataForm(true)
+        }
+    }
     //datos del contexto
     const { experienciaContext, setExperienciaContext } = useContext(Context)
 
@@ -42,14 +54,20 @@ export const FormExperiencia = () => {
 
     var nro = 1
 
+
+
     return (
         <>
             <div className="formHeader">
                 <h2>Actualizar Informacion General, contacto y redes</h2>
             </div>
             <hr />
+            <button className={`${btnToggle[0]}`} onClick={switchToggle}><i className="fa-solid fa-file-pen"></i>NewDoc</button>
+            <button className={`${btnToggle[1]}`} onClick={switchToggle}><i className="fa-solid fa-pen-to-square"></i> UpDate</button>
+            <hr/>
             {
-                loading ? <p>Cargando</p> : experiencia.map(exp=><DataRow obj={exp} nombre={exp.Empresa} key={nro++}/>)
+                newDataForm ? <InterFormExperiencia objeto={{}} tipo={false}/> :
+                (loading ? <p>Cargando</p> : experiencia.map(exp=><DataRow obj={exp} nombre={exp.Empresa} key={nro++}/>))
             }
         </>
     )

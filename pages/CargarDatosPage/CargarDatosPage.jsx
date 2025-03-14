@@ -13,6 +13,7 @@ export const CargarDatosPage = () => {
     const [experiencia, setExperiencia] = useState('')
     const [curso, setCurso] = useState('')
     const [conocimiento, setConocimiento] = useState('')
+    const [loadImg, setLoadImg] = useState('')
 
     const Activar = (Opcion)=>{
         Opcion === "informacion" ? setInformacion(['active','block']) : setInformacion('')
@@ -20,6 +21,7 @@ export const CargarDatosPage = () => {
         Opcion === "experiencia" ? setExperiencia(['active','block']) : setExperiencia('')
         Opcion === "curso" ? setCurso(['active','block']) : setCurso('')
         Opcion === "conocimiento" ? setConocimiento(['active','block']) : setConocimiento('')
+        Opcion === "loadImg" ? setLoadImg(['active','block']) : setLoadImg('')
     }
 
     useEffect(()=>{
@@ -36,6 +38,7 @@ export const CargarDatosPage = () => {
                 <button className={`tablinks ${experiencia[0]}`} onClick={()=>Activar('experiencia')}>Experiencia</button>
                 <button className={`tablinks ${curso[0]}`} onClick={()=>Activar('curso')}>Curso</button>
                 <button className={`tablinks ${conocimiento[0]}`} onClick={()=>Activar('conocimiento')}>Conocimiento</button>
+                <button className={`tablinks ${conocimiento[0]}`} onClick={()=>Activar('setLoadImg')}>Subir Imagen</button>
             </div>
 
             <div id="Informacion" className={`tabcontent ${informacion[1]}`}>
