@@ -17,7 +17,6 @@ export const EstudioPage = () => {
     const getDataFromFirebase = async () => {
         if (estudiosContext) {
             setEstudios(estudiosContext)
-            console.log('from Context')
             return
         }
         setLoading(true)
@@ -27,7 +26,6 @@ export const EstudioPage = () => {
             setData(data.sort((a, b) => b.Orden - a.Orden))
             setEstudios(data)
             setEstudiosContext(data)
-            console.log('From hook')
         } catch (error) {
             console.log(error)
             setError(error)

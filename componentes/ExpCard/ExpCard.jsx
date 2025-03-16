@@ -4,6 +4,11 @@ import './ExpCard.css'
 
 export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
     var unikey = 1
+    const tareas = Tareas.sort((a, b) => {
+        if (a.Cat < b.Cat) { return -1; }
+        if (a.Cat > b.Cat) { return 1; }
+        return 0;
+    })
 
     const [toggle, setToggle] = useState(['', ''])
 
@@ -27,7 +32,7 @@ export const ExpCard = ({ Empresa, Area, Resumen, Tareas, Imagen }) => {
                 <button className={`accordion ${toggle[0]}`} onClick={toggleButtonChange} ><i className="fa-solid fa-arrow-right" /> Click Aqui para ver responsabilidades</button>
                 <div className={`panel ${toggle[1]}`}>
                     <ul >
-                        {Tareas.map(
+                        {tareas.map(
                             t => <li key={unikey++} className='itemList'>{t.Tarea}</li>
                         )}
                     </ul>

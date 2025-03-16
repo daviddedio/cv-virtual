@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+//import { useEffect, useState, useRef } from "react";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
 // Configuración de Firebase

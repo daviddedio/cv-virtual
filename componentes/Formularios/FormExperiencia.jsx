@@ -67,7 +67,7 @@ export const FormExperiencia = () => {
             <hr/>
             {
                 newDataForm ? <InterFormExperiencia objeto={{}} tipo={false}/> :
-                (loading ? <p>Cargando</p> : experiencia.map(exp=><DataRow obj={exp} nombre={exp.Empresa} key={nro++}/>))
+                (loading ? <p>Cargando</p> : experiencia.map(exp=><DataRow obj={exp} nombre={exp.Empresa} resetFunction={getDataFromFirebase} key={nro++}/>))
             }
         </>
     )

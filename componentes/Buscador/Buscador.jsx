@@ -10,7 +10,6 @@ export const Buscador = ({ cat, filtro }) => {
     }
 
     useEffect(() => {
-        console.log(cat)
         setCategorias(cat)
         //cargarCategorias(cat)
     }, [cat])

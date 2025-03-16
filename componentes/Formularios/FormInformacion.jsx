@@ -74,7 +74,6 @@ export const FormInformacion = () => {
     const mostrarModal = (mensaje, type) => {
         setComponente(<CustomAlert mensaje={mensaje} ntype={type} />)
         setState(true)
-        console.log("corta")
     }
 
 

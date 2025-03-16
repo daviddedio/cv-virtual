@@ -1,38 +1,38 @@
-.dataRowConteiner{
+.dataRowConteiner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 50px;
 }
 
-.dataRowButtons{
+.dataRowButtons {
     display: flex;
     justify-content: space-around;
     width: 100px;
 }
 
-.dataRowButtons>button{
+.dataRowButtons>button {
     scale: 1.5;
     background-color: white;
     border: none;
 }
 
-.dataRowButtons>button:hover{
+.dataRowButtons>button:hover {
     border-bottom: 1px solid gray;
     border-right: 1px solid gray;
 }
 
-.dataRowButtons>button:active{
+.dataRowButtons>button:active {
     border-bottom: 1px solid black;
     border-right: 1px solid black;
 }
 
-.dataRowInfo{
+.dataRowInfo {
     font-size: 28px;
     font-weight: bold;
 }
 
-.generalDisplay{
+.generalDisplay {
     border: black 1px solid;
     margin: 10px;
     padding: 10px;
@@ -41,15 +41,36 @@
 }
 
 
-.displayFormStatus{
+.displayFormStatus {
     overflow: hidden;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.7s ease-out;
 }
 
-.show{
+.show {
     display: block;
     max-height: 900px;
 }
 
+.eliminarExperiencia {
+    animation: latido linear 3s infinite;
+}
+
+.colorRedExp{
+    color: red;
+}
+
+@keyframes latido {
+    0% {
+        opacity: 20%;
+    }
+
+    50%{
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 20%;
+    }
+}

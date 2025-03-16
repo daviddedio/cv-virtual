@@ -4,6 +4,7 @@ import {FormConocimiento} from '../../componentes/Formularios/FormConocimiento'
 import {FormCursos} from '../../componentes/Formularios/FormCursos'
 import {FormEstudios} from "../../componentes/Formularios/FormEstudios"
 import {FormExperiencia} from '../../componentes/Formularios/FormExperiencia'
+import { FormUploadImage } from '../../componentes/Formularios/FormUploadImage'
 import './CargarDatosPage.css'
 
 export const CargarDatosPage = () => {
@@ -38,7 +39,7 @@ export const CargarDatosPage = () => {
                 <button className={`tablinks ${experiencia[0]}`} onClick={()=>Activar('experiencia')}>Experiencia</button>
                 <button className={`tablinks ${curso[0]}`} onClick={()=>Activar('curso')}>Curso</button>
                 <button className={`tablinks ${conocimiento[0]}`} onClick={()=>Activar('conocimiento')}>Conocimiento</button>
-                <button className={`tablinks ${conocimiento[0]}`} onClick={()=>Activar('setLoadImg')}>Subir Imagen</button>
+                <button className={`tablinks ${loadImg[0]}`} onClick={()=>Activar('loadImg')}>Subir Imagen</button>
             </div>
 
             <div id="Informacion" className={`tabcontent ${informacion[1]}`}>
@@ -62,6 +63,11 @@ export const CargarDatosPage = () => {
             <div id="Conocimiento" className={`tabcontent ${conocimiento[1]}`}>
                 <h3>Conocimiento</h3>
                 <FormConocimiento/>
+            </div>
+
+            <div id="loadImg" className={`tabcontent ${loadImg[1]}`}>
+                <h3>Conocimiento</h3>
+                <FormUploadImage/>
             </div>
         </>
     )
