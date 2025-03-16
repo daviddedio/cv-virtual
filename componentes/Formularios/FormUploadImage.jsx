@@ -6,7 +6,6 @@ export const FormUploadImage = () => {
             <div className="formHeader">
                 <h2>Cargar imagenes</h2>
             </div>
-
             <hr />
             <InputFiles/>
         </>

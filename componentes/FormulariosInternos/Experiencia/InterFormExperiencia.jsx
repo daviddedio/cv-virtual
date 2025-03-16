@@ -63,8 +63,6 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
     const enviarDatos = (e) => {
         e.preventDefault()
         inputTareas()
-
-    
     }
 
     const cargarDatos = async (e) => {

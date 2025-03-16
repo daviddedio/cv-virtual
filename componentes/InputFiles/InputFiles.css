@@ -11,7 +11,7 @@ input[type=file] {
     border-radius: 4px;
     box-sizing: border-box;*/
     font-style: italic;
-    font-size: 18px;
+    font-size: 24px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -24,10 +24,12 @@ input[type=file] {
 
 .imgMuestraConteiner{
     width: 30%;
+    margin: 25px auto;
+    padding: 10px;
+    border: 1px solid black;
 }
 
-.imgMuestraConteiner>input[type='image'] {
-    object-fit: cover;
-    width: auto;
-    margin-left: 10px;
+.imgMuestraConteiner>img {
+    /*object-fit: cover;*/
+    width: 100%;
 }

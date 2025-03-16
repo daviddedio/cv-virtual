@@ -56,17 +56,14 @@ export const CargarDatosPage = () => {
             </div>
 
             <div id="Curso" className={`tabcontent ${curso[1]}`}>
-                <h3>Curso</h3>
                 <FormCursos/>
             </div>
 
             <div id="Conocimiento" className={`tabcontent ${conocimiento[1]}`}>
-                <h3>Conocimiento</h3>
                 <FormConocimiento/>
             </div>
 
             <div id="loadImg" className={`tabcontent ${loadImg[1]}`}>
-                <h3>Conocimiento</h3>
                 <FormUploadImage/>
             </div>
         </>
