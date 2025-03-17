@@ -59,7 +59,7 @@ export const FormExperiencia = () => {
     return (
         <>
             <div className="formHeader">
-                <h2>Actualizar Informacion General, contacto y redes</h2>
+                <h2>Actualizar Informacion de experiencias laborales</h2>
             </div>
             <hr />
             <button className={`${btnToggle[0]}`} onClick={switchToggle}><i className="fa-solid fa-file-pen"></i>NewDoc</button>

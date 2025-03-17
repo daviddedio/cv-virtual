@@ -148,7 +148,7 @@ export const FormEstudios = () => {
     return (
         <>
             <div className="formHeader">
-                <h2>Actualizar Informacion General, contacto y redes</h2>
+                <h2>Actualizar Informacion de estudios</h2>
             </div>
 
             {loading ? <BuscadorSkeleton /> : <Buscador cat={categorias} filtro={modoEditarDatos} />}

@@ -47,7 +47,6 @@ export const CargarDatosPage = () => {
             </div>
 
             <div id="Estudios" className={`tabcontent ${estudios[1]}`}>
-                <h3>Paris</h3>
                 <FormEstudios/>
             </div>
 
