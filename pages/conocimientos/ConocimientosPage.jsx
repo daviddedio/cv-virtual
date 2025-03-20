@@ -38,7 +38,7 @@ export const ConocimientosPage = () => {
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Conocimiento"));
-            const data = querySnapshot.docs.map(doc => doc.data())
+            const data = querySnapshot.docs.map(doc => Object.assign( {id:doc.id},doc.data()))
             cargarCategorias(data)
             setData(data)
             setItem(data)

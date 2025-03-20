@@ -47,7 +47,7 @@ export const CursoPage = () => {
         setLoading(true)
         try {
             const querySnapshot = await getDocs(collection(db, "Cursos"));
-            const data = querySnapshot.docs.map(doc => doc.data())
+            const data = querySnapshot.docs.map(doc => Object.assign( {id:doc.id},doc.data()))
             setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds))
             cargarCategorias(data)
             setItem(data)

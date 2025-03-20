@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { Buscador, BuscadorSkeleton } from '../Buscador/Buscador'
 import { Context } from "../../context/Context"
-import { doc, setDoc, addDoc, collection, getDocs } from "firebase/firestore";
+import { doc, setDoc, addDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from '../../FireBase/FireBaseReturnData';
 import { useModalContext } from "../modal/context/ModalContext";
 import { CustomAlert } from "../Alerta/CustomAlert";
@@ -17,7 +17,7 @@ export const FormCursos = () => {
     const { cursosContext, setCursosContext } = useContext(Context)
 
     const [inputForm, setInputForm] = useState({
-        nombre: '', informacion: '', categoria: '', comentario: '', fotodir: '', finicio: '', id: ''
+        nombre: '', informacion: '', categoria: '', comentario: '', fotodir: '', finicio: '', id: 'New'
     })
 
     const { nombre, informacion, categoria, comentario, fotodir, finicio, id } = inputForm
@@ -71,7 +71,9 @@ export const FormCursos = () => {
     }, [])
 
     const modoEditarDatos = (value) => {
+        
         const datoSeleccionado = curso.filter(item => item.Nombre === value)
+        console.log(datoSeleccionado)
         if (value === 'todo') {
             setInputForm(
                 {
@@ -81,7 +83,7 @@ export const FormCursos = () => {
                     , comentario: ''
                     , fotodir: ''
                     , finicio: ''
-                    , id: ''
+                    , id: 'New'
                 }
             )
         } else {
@@ -105,23 +107,10 @@ export const FormCursos = () => {
     }
 
     const cargarDatos = async (e) => {
-        console.log(id)
         e.preventDefault()
         setLoading(true)
         try {
-            if (id) {
-                await setDoc(doc(db, "Cursos", id), {
-                    Nombre: nombre
-                    , Informacion: informacion
-                    , Categoria: categoria
-                    , Comentarios: comentario
-                    , FotoDir: fotodir
-                    , fInicio: Timestamp.fromDate(new Date(finicio))
-                })
-                //throw new error
-                setCursosContext('')
-                mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
-            } else {
+            if (id === 'New') {
                 console.log(inputForm)
                 const docRef = await addDoc(collection(db, "Cursos"), {
                     Nombre: nombre
@@ -133,6 +122,18 @@ export const FormCursos = () => {
                 })
                 setCursosContext('')
                 mostrarModal(`Nuevo curso agregado. Su ID es ${docRef.id}`)
+            } else {
+                await setDoc(doc(db, "Cursos", id), {
+                    Nombre: nombre
+                    , Informacion: informacion
+                    , Categoria: categoria
+                    , Comentarios: comentario
+                    , FotoDir: fotodir
+                    , fInicio: Timestamp.fromDate(new Date(finicio))
+                })
+                //throw new error
+                setCursosContext('')
+                mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             }
         } catch (error) {
             mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
@@ -144,10 +145,28 @@ export const FormCursos = () => {
         }
     }
 
-    const deleteCurso = (e) => {
-        e.preventDefault()
-        alert('eliminando')
-    }
+    const borrarDato = async (e) => {
+            e.preventDefault()
+            if (id==="New" || id===''){
+                alert('Es un nuevo documento') 
+                return
+            }
+
+            var status = confirm(`seguro que quieres borrar este documento ${id} - ${nombre}?`)
+            if (status === true) {
+                setLoading(true)
+                try {
+                    await deleteDoc(doc(db, "Cursos", id))
+                    setCursosContext('')
+                    mostrarModal("Dato eliminado correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
+                } catch (error) {
+                    mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
+                    setError(error)
+                }finally{
+                    setLoading(false)
+                }
+            }
+        }
 
     return (
         <>
@@ -160,7 +179,7 @@ export const FormCursos = () => {
             <div className="displayForm">
                 <form onSubmit={cargarDatos} className="formEditData">
                     <div className="rowEstudio">
-                        {id != 'New' && <button onClick={deleteCurso}><i className="fa-solid fa-trash"></i></button>}
+                        {id != 'New' && <button onClick={borrarDato}><i className="fa-solid fa-trash"></i></button>}
                         <h3>{`ID: ${id}`}</h3>
                     </div>
                     <label htmlFor="nombre">Nombre</label>
