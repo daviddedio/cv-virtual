@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { CursoItem, CursoItemSkeleton } from '../../componentes/CursoItem/CursoItem'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
+import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import {Context} from '../../context/Context'
 import { Buscador, BuscadorSkeleton } from '../../componentes/Buscador/Buscador';
+import {cargarCat, handleFilter, settear} from '../../Utilidades/Utilidades'
 import './CursosPage.css'
 
 export const CursoPage = () => {
@@ -17,42 +17,20 @@ export const CursoPage = () => {
 
     var keyItem = 1
 
-    const cargarCategorias = (datos) => {
-        const result = [];
-        datos.forEach((it) => {
-            if (!result.includes(it.Categoria)) {
-                result.push(it.Categoria);
-            }
-        })
-        setCategorias(result)
-    }
-
-    function filtrarCurso(dato) {
-        if (dato === "todo") {
-            setItem(cursos)
-        } else {
-            let temp = cursos.filter((con) => con.Categoria === dato)
-            setItem(temp)
-        }
-    }
+    //utilidades
+    const cargarCategorias = (dato) => {cargarCat(dato,setCategorias,"Categoria")}
+    const filtrarCurso = (dato) => {handleFilter(dato, cursos, "Categoria", setItem)}
 
     const getDataFromFirebase = async () => {
         if (cursosContext) {
-            cargarCategorias(cursosContext)
-            setItem(cursosContext)
-            setCursos(cursosContext)
+            settear([cargarCategorias, setItem, setCursos], cursosContext)
             return
         }
         
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Cursos"));
-            const data = querySnapshot.docs.map(doc => Object.assign( {id:doc.id},doc.data()))
-            setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds))
-            cargarCategorias(data)
-            setItem(data)
-            setCursos(data)
-            setCursosContext(data)
+            const datos = await getSomeDataFromFirebase('Cursos')
+            settear([cargarCategorias, setItem, setCursos, setData, setCursosContext],datos.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds) )
         } catch (error) {
             setError(error)
         } finally {

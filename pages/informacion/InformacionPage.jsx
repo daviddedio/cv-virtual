@@ -1,7 +1,6 @@
 import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/GeneralTable"
-import { useState, useRef, useEffect, useContext } from "react";
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
+import { useState, useEffect, useContext } from "react";
+import {  getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
 import "./InformacionPage.css"
 
@@ -12,10 +11,8 @@ export const InformacionPage = () => {
     const [dataRedes, setDataRedes] = useState({})
 
     //estados
-    const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const fetchedRef = useRef(false); // Controla si ya se hizo la petición
 
     const { informacion, infoContextContacto, setInfoContextContacto, infoContextInicial, setInfoContextInicial, infoContextRedes, setInfoContextRedes } = useContext(Context)
 
@@ -27,18 +24,17 @@ export const InformacionPage = () => {
         }
 
         setLoading(true)
-
         try {
-            const querySnapshot = await getDocs(collection(db, "InfoPersonal"));
-            const data = querySnapshot.docs.map(doc => doc.data())
-            //setData(data)
-            setDataInfo(data[1])
-            setDataLocalizacion(data[0])
-            setDataRedes(data[2])
+            const datos = await getSomeDataFromFirebase('InfoPersonal')
 
-            setInfoContextContacto(data[0])
-            setInfoContextInicial(data[1])
-            setInfoContextRedes(data[2])
+            setDataInfo(datos[1])
+            setDataLocalizacion(datos[0])
+            setDataRedes(datos[2])
+
+            setInfoContextContacto(datos[0])
+            setInfoContextInicial(datos[1])
+            setInfoContextRedes(datos[2])
+
         } catch (error) {
             setError(error)
         } finally {

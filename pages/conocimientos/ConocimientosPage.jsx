@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from 'react'
 import { KnowCard, KnowCardSkeleton } from '../../componentes/KnowCard/KnowCard'
 import { Context } from '../../context/Context'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
+import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import { Buscador, BuscadorSkeleton } from '../../componentes/Buscador/Buscador';
+import { cargarCat, handleFilter, settear} from '../../Utilidades/Utilidades'
 import './ConocimientosPage.css'
 
 export const ConocimientosPage = () => {
 
+    //useStates
     const [conocimientos, setConocimientos] = useState([])
     const [categorias, setCategorias] = useState([])
     const [item, setItem] = useState([]) //el que se usa
@@ -16,55 +17,35 @@ export const ConocimientosPage = () => {
     const [error, setError] = useState(null);
     const { conocimientosContext, setConocimientosContext } = useContext(Context)
 
+    //otras variables
     var keyItem = 1
 
-    const cargarCategorias = (dato) => {
-        const result = [];
-        dato.forEach((item) => {
-            if (!result.includes(item.Categoria)) {
-                result.push(item.Categoria);
-            }
-        })
-        setCategorias(result)
-    }
+    //funciones o utilidades
+    const cargarCategorias = (dato) => {cargarCat(dato, setCategorias,"Categoria")}
+    const filtrar = (dato) => {handleFilter(dato, conocimientos,"Categoria", setItem)}
 
     const getDataFromFirebase = async () => {
         if (conocimientosContext) {
-            cargarCategorias(conocimientosContext)
-            setItem(conocimientosContext)
-            setConocimientos(conocimientosContext)
+            settear([cargarCategorias, setItem, setConocimientos], conocimientosContext)
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Conocimiento"));
-            const data = querySnapshot.docs.map(doc => Object.assign( {id:doc.id},doc.data()))
-            cargarCategorias(data)
-            setData(data)
-            setItem(data)
-            setConocimientos(data)
-            setConocimientosContext(data)
+            const datos = await getSomeDataFromFirebase('Conocimiento')
+            settear([cargarCategorias, setData, setItem, setConocimientos, setConocimientosContext], datos)
         } catch (error) {
-            console.log(error)
             setError(error)
         } finally {
             setLoading(false)
         }
     }
 
+    //useEffect
     useEffect(() => {
         getDataFromFirebase()
     }, [])
 
-    function filtrar(dato) {
-        if (dato === "todo") {
-            setItem(conocimientos)
-        } else {
-            let temp = conocimientos.filter((con) => con.Categoria === dato)
-            setItem(temp)
-        }
-    }
-
+    //returns
     return (
         <>
             {

@@ -1,8 +1,8 @@
 import { ExpCard, ExpCardSkeleton } from '../../componentes/ExpCard/ExpCard'
 import { useState, useEffect, useContext } from "react";
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
+import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import {Context} from '../../context/Context'
+import { settear } from '../../Utilidades/Utilidades';
 
 export const ExperienciaPage = () => {
     const [experiencia, setExperiencia] = useState([])
@@ -15,16 +15,13 @@ export const ExperienciaPage = () => {
 
     const getDataFromFirebase = async () => {
         if (experienciaContext){
-            setExperiencia(experienciaContext)
+            settear([setExperiencia], experienciaContext)
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Experiencia"));
-            const data = querySnapshot.docs.map(doc => Object.assign({Id:doc.id},doc.data()))
-            setData(data.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
-            setExperiencia(data)
-            setExperienciaContext(data)
+            const datos = await getSomeDataFromFirebase('Experiencia')
+            settear([setData, setExperiencia, setExperienciaContext], datos.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
         } catch (error) {
             setError(error)
         } finally {

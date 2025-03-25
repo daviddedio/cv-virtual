@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { SchoolCard, SchoolCardLoading } from '../../componentes/SchoolCard/SchoolCard';
 import { Context } from '../../context/Context'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
+import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
+import { settear } from '../../Utilidades/Utilidades';
 import './EstudioPage.css'
 
 export const EstudioPage = () => {
@@ -16,18 +16,15 @@ export const EstudioPage = () => {
 
     const getDataFromFirebase = async () => {
         if (estudiosContext) {
-            setEstudios(estudiosContext)
+            settear([setEstudios],estudiosContext)
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Estudios"));
-            const data = querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
-            setData(data.sort((a, b) => b.Orden - a.Orden))
-            setEstudios(data)
-            setEstudiosContext(data)
+            const datos = await getSomeDataFromFirebase('Estudios')
+            settear([setData, setEstudios, setEstudiosContext], datos.sort((a,b)=> b.Orden-a.Orden))
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
             setError(error)
         } finally {
             setLoading(false)

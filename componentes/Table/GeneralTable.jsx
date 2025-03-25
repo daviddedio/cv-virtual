@@ -8,6 +8,7 @@ export const GeneralTable = ({ data , title }) => {
             <table>
                 <tbody>
                     {Object.entries(data).map(([key, value], index) => (
+                        key != 'id' &&
                         <tr key={index} className="">
                             <td className="atributo">{key}:</td>
                             <td className="valor">{value}</td>
