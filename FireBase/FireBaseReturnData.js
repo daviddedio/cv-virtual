@@ -25,3 +25,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app)
+
+export const getDataFromFirebase = async(tabla)=>{
+    const querySnapshot = await getDocs(collection(db, tabla));
+    const data = querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
+}
