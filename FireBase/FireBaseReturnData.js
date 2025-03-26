@@ -13,13 +13,13 @@ const firebaseConfig = {
     messagingSenderId: "TU_MESSAGING_SENDER_ID",
     appId: "TU_APP_ID"*/
 
-    apiKey: "AIzaSyCfriZeFYMUV8YAeo3xmBrkisLNyDCQQsk",
-    authDomain: "cvelectronicodediodavid.firebaseapp.com",
-    projectId: "cvelectronicodediodavid",
-    storageBucket: "cvelectronicodediodavid.appspot.com",
-    messagingSenderId: "112854746605",
-    appId: "1:112854746605:web:5ec68501648048e46fd3e4",
-    measurementId: "G-ZTX1K328EF"
+    apiKey: import.meta.env.VITE_APIKEY,
+    authDomain: import.meta.env.VITE_AUTHDOMAIN,
+    projectId: import.meta.env.VITE_PROJECTID,
+    storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+    appId: import.meta.env.VITE_APPID,
+    measurementId: import.meta.env.VITE_MEASUREMENTID
 };
 
 // Inicializar Firebase
