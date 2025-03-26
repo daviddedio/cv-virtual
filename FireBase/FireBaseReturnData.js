@@ -2,7 +2,7 @@
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -27,11 +27,15 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app)
 
-export const getSomeDataFromFirebase = async(tabla)=>{
+export const getSomeDataFromFirebase = async (tabla) => {
     try {
         const querySnapshot = await getDocs(collection(db, tabla));
-        return querySnapshot.docs.map(doc => Object.assign({id:doc.id},doc.data()))
+        return querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
     } catch (error) {
         return error
     }
+}
+
+export const updateDocument = async (tabla, id, objeto) => {
+    await setDoc(doc(db, tabla, id), objeto )
 }
