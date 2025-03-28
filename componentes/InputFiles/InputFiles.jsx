@@ -58,7 +58,7 @@ export const InputFiles = () => {
             </div>
             <label htmlFor="file">Ruta de la imagen</label>
             <span> - (Copiar y pegar direccion debajo)</span>
-            <input type="text" name="file" id="file" value={fileName} readOnly />
+            <input type="text" name="file" id="inputFilesfile" value={fileName} readOnly />
         </form>
     )
 }

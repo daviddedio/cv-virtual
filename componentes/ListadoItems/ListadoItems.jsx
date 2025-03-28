@@ -4,7 +4,8 @@ export const ListadoItems = ({items, metodo}) => {
     const [itemTarea, setItemTarea] = useState(items)
     const form = useRef()
     
-    const quitarItem = (index)=>{
+    const quitarItem = (e, index)=>{
+        e.preventDefault()
         const temp = itemTarea.filter(i=>i.Tarea != index)
         metodo(temp)
         setItemTarea(temp)
@@ -44,7 +45,7 @@ export const ListadoItems = ({items, metodo}) => {
         </div>
         <hr />
         <ul className="este">
-            {itemTarea.map((it, index) => <li key={index}><button onClick={() => quitarItem(it.Tarea)}><i className="fa-solid fa-eraser"></i></button> - {`${it.Cat} - ${it.Tarea}`} </li>)}
+            {itemTarea.map((it, index) => <li key={index}><button onClick={(e) => quitarItem(e,it.Tarea)}><i className="fa-solid fa-eraser"></i></button> - {`${it.Cat} - ${it.Tarea}`} </li>)}
         </ul>
         </>
     )

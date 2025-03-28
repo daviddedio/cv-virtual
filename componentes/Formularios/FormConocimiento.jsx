@@ -5,7 +5,8 @@ import { doc, setDoc, addDoc, collection, getDocs, deleteDoc } from "firebase/fi
 import { db } from '../../FireBase/FireBaseReturnData';
 import { useModalContext } from "../modal/context/ModalContext";
 import { CustomAlert } from "../Alerta/CustomAlert";
-
+import { getSomeDataFromFirebase, updateDocument, addDocument, deleteDocument } from "../../FireBase/FireBaseReturnData";
+import { cargarCat, settear } from "../../Utilidades/Utilidades";
 
 export const FormConocimiento = () => {
     const { setComponente, setState } = useModalContext()
@@ -15,7 +16,6 @@ export const FormConocimiento = () => {
     const [data, setData] = useState('')
     const [categorias, setCategorias] = useState([])
     const { conocimientosContext, setConocimientosContext } = useContext(Context)
-
 
     const [inputForm, setInputForm] = useState({
         cat: '', con: '', nivel: '', info: '', id: 'New'
@@ -30,31 +30,27 @@ export const FormConocimiento = () => {
         })
     }
 
-    const cargarCategorias = (datos) => {
-        const result = [];
-        datos.forEach((it) => {
-            if (!result.includes(it.Con)) {
-                result.push(it.Con);
-            }
-        })
-        setCategorias(result)
-    }
-
     const getDataFromFirebase = async () => {
         if (conocimientosContext) {
-            setConocimiento(conocimientosContext)
-            cargarCategorias(conocimientosContext)
-            console.log(conocimiento)
+            let temp = conocimientosContext.sort(function (a, b) {
+                if (a.Con < b.Con) { return -1; }
+                if (a.Con > b.Con) { return 1; }
+                return 0;
+            })
+            setConocimiento(temp)
+            cargarCat(temp, setCategorias, "Con")
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Conocimiento"));
-            const data = querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
-            cargarCategorias(data)
-            setData(data.sort((a, b) => b.Orden - a.Orden))
-            setConocimiento(data)
-            setConocimientosContext(data)
+            const datos = await getSomeDataFromFirebase("Conocimiento")
+            let temp = datos.sort(function (a, b) {
+                if (a.Con < b.Con) { return -1; }
+                if (a.Con > b.Con) { return 1; }
+                return 0;
+            })
+            cargarCat(temp, setCategorias, "Con")
+            settear([setData, setConocimiento, setConocimientosContext], temp)
         } catch (error) {
             console.log(error)
             setError(error)
@@ -63,28 +59,14 @@ export const FormConocimiento = () => {
         }
     }
 
-    useEffect(() => {
-        getDataFromFirebase()
-    }, [])
-
     const modoEditarDatos = (value) => {
         const datoSeleccionado = conocimiento.filter(item => item.Con === value)
         if (value === 'todo') {
-            setInputForm(
-                {
-                    cat: '', con: '', nivel: '', info: '', id: 'New'
-                }
-            )
+            setInputForm({ cat: '', con: '', nivel: '', info: '', id: 'New' })
         } else {
-            setInputForm(
-                {
-                    cat: datoSeleccionado[0].Categoria,
-                    con: datoSeleccionado[0].Con,
-                    nivel: datoSeleccionado[0].Nivel,
-                    info: datoSeleccionado[0].info,
-                    id: datoSeleccionado[0].id
-                }
-            )
+            setInputForm({
+                cat: datoSeleccionado[0].Categoria, con: datoSeleccionado[0].Con, nivel: datoSeleccionado[0].Nivel, info: datoSeleccionado[0].info, id: datoSeleccionado[0].id
+            })
         }
     }
 
@@ -98,31 +80,21 @@ export const FormConocimiento = () => {
         setLoading(true)
         try {
             if (id === 'New') {
-                console.log(inputForm)
-                const docRef = await addDoc(collection(db, "Conocimiento"), {
-                    Categoria: cat
-                    , Con: con
-                    , Nivel: nivel
-                    , info: info
+                const docRef = await addDocument("Conocimiento", {
+                    Categoria: cat, Con: con, Nivel: nivel, info: info
                 })
                 setConocimientosContext('')
                 mostrarModal(`Nuevo curso agregado. Su ID es ${docRef.id}`)
             } else {
-                await setDoc(doc(db, "Conocimiento", id), {
-                    Categoria: cat
-                    , Con: con
-                    , Nivel: nivel
-                    , info: info
+                await updateDocument("Conocimiento", id, {
+                    Categoria: cat, Con: con, Nivel: nivel, info: info
                 })
-                //throw new error
                 setConocimientosContext('')
                 mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             }
         } catch (error) {
             mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
             setError(error)
-            console.log(error)
-
         } finally {
             setLoading(false)
         }
@@ -139,7 +111,7 @@ export const FormConocimiento = () => {
         if (status === true) {
             setLoading(true)
             try {
-                await deleteDoc(doc(db, "Conocimiento", id))
+                await deleteDocument("Conocimiento", id)
                 setConocimientosContext('')
                 mostrarModal("Dato eliminado correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             } catch (error) {
@@ -150,6 +122,10 @@ export const FormConocimiento = () => {
             }
         }
     }
+
+    useEffect(() => {
+        getDataFromFirebase()
+    }, [])
 
     return (
         <>
@@ -167,7 +143,7 @@ export const FormConocimiento = () => {
                     </div>
                     <label htmlFor="cat">Categoria</label>
                     <input type="text"
-                        id="cat"
+                        id="catCon"
                         name="cat"
                         value={cat}
                         placeholder="Cargar una categoria"
@@ -175,16 +151,16 @@ export const FormConocimiento = () => {
 
                     <label htmlFor="con">Conocimiento</label>
                     <input type="text"
-                        id="con"
+                        id="conCon"
                         name="con"
                         placeholder="Cargar conocimiento"
                         value={con} onChange={actualizarDatos} />
 
                     <label htmlFor="nivel">Indicar Nivel</label>
-                    <input type="text" id="nivel" name="nivel" placeholder="Indicar Nivel" value={nivel} onChange={actualizarDatos} />
+                    <input type="text" id="nivelCon" name="nivel" placeholder="Indicar Nivel" value={nivel} onChange={actualizarDatos} />
 
                     <label htmlFor="info">Informacion</label>
-                    <input type="text" id="info" name="info" placeholder="Informacion del conocimiento" value={info} onChange={actualizarDatos} />
+                    <input type="text" id="infoCon" name="info" placeholder="Informacion del conocimiento" value={info} onChange={actualizarDatos} />
                     <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />
                 </form>
             </div>

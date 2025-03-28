@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { InterFormExperiencia } from '../../componentes/FormulariosInternos/Experiencia/InterFormExperiencia'
-import { db } from '../../FireBase/FireBaseReturnData'
-import { doc, deleteDoc } from 'firebase/firestore'
 import { Context } from '../../context/Context'
 import { useModalContext } from '../modal/context/ModalContext'
 import { CustomAlert } from '../Alerta/CustomAlert'
+import { deleteDocument } from '../../FireBase/FireBaseReturnData'
 import './DataRow.css'
 export const DataRow = ({ obj, nombre}) => {
 
@@ -16,14 +15,11 @@ export const DataRow = ({ obj, nombre}) => {
     const [error, setError] = useState('')
 
     const [show, setShow] = useState(false)
-    const id = obj.Id
+    const id = obj.id
 
     const editar = () => {
         setShow(!show)
     }
-
-    useEffect(() => {
-    }, [])
 
     const mostrarModal = (mensaje, type) => {
         setComponente(<CustomAlert mensaje={mensaje} ntype={type} />)
@@ -36,7 +32,8 @@ export const DataRow = ({ obj, nombre}) => {
         if (status === true) {
             setLoading(true)
             try {
-                await deleteDoc(doc(db, "Experiencia", id))
+                await deleteDocument("Experiencia", id)
+                //await deleteDoc(doc(db, "Experiencia", id))
                 setExperienciaContext('')
                 mostrarModal("Dato eliminado correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             } catch (error) {
@@ -47,7 +44,6 @@ export const DataRow = ({ obj, nombre}) => {
             }
         }
     }
-
 
     return (
         <div className="generalDisplay">
@@ -62,7 +58,6 @@ export const DataRow = ({ obj, nombre}) => {
                             </div>
                         </>
                 }
-
             </div>
             <div className={`${show ? 'displayFormStatus show' : 'displayFormStatus'}`}>
                 <hr />

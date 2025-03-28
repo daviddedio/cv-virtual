@@ -20,7 +20,7 @@ export const ExperienciaPage = () => {
         }
         setLoading(true)
         try {
-            const datos = await getSomeDataFromFirebase('Experiencia')
+            const datos = await getSomeDataFromFirebase("Experiencia")
             settear([setData, setExperiencia, setExperienciaContext], datos.sort((a,b) => b.fInicio.seconds - a.fInicio.seconds ))
         } catch (error) {
             setError(error)

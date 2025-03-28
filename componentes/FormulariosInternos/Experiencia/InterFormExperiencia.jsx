@@ -3,9 +3,8 @@ import { useEffect, useState, useContext } from 'react'
 import { ListadoItems } from '../../ListadoItems/ListadoItems'
 import { useModalContext } from '../../modal/context/ModalContext'
 import { CustomAlert } from '../../../componentes/Alerta/CustomAlert'
-import { db } from '../../../FireBase/FireBaseReturnData'
+import { updateDocument, addDocument } from '../../../FireBase/FireBaseReturnData'
 import { Context } from '../../../context/Context'
-import { doc, setDoc, collection, addDoc} from "firebase/firestore";
 import { Timestamp } from "firebase/firestore"
 
 export const InterFormExperiencia = ({ objeto, tipo }) => {
@@ -14,7 +13,7 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    const { Id, Area, Empresa, Imagen, Resumen, Tareas, fInicio } = objeto
+    const { id, Area, Empresa, Imagen, Resumen, Tareas, fInicio } = objeto
     const [itemTarea, setItemTarea] = useState(Tareas)
 
     useEffect(() => {
@@ -23,7 +22,7 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
 
     //metodo del formulario
     const [inputForm, setInputForm] = useState(tipo ? {
-        id: Id,
+        Id: id,
         area: Area,
         empresa: Empresa,
         imagen: Imagen,
@@ -41,7 +40,7 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
 
     })
 
-    const { area, empresa, imagen, resumen, tareas, finicio, id } = inputForm
+    const { area, empresa, imagen, resumen, tareas, finicio, Id } = inputForm
 
     const actualizarTareas = (newTareas) => {
         //setItemTarea(newTareas)
@@ -50,7 +49,6 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
 
     const actualizarDatos = ({ target }) => {
         const { name, value, type, checked } = target
-        console.log(finicio)
         setInputForm({
             ...inputForm, [name]: type === 'checkbox' ? (checked ? "Activa" : "No activa") : value
         })
@@ -70,34 +68,21 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
         setLoading(true)
         try {
             if (tipo) {
-                await setDoc(doc(db, "Experiencia", id), {
-                    Area: area,
-                    Empresa: empresa,
-                    Imagen: imagen,
-                    Resumen: resumen,
-                    Tareas: tareas,
-                    fInicio: Timestamp.fromDate(new Date(finicio))
+                await updateDocument("Experiencia", Id, {
+                    Area: area, Empresa: empresa, Imagen: imagen, Resumen: resumen, Tareas: tareas, fInicio: Timestamp.fromDate(new Date(finicio))
                 })
-                //throw new error
                 setExperienciaContext('')
                 mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             } else {
-                const docRef = await addDoc(collection(db, "Experiencia"), {
-                    Area: area,
-                    Empresa: empresa,
-                    Imagen: imagen,
-                    Resumen: resumen,
-                    Tareas: tareas,
-                    fInicio: Timestamp.fromDate(new Date(finicio))
+                const docRef = await addDocument("Experiencia", {
+                    Area: area, Empresa: empresa, Imagen: imagen, Resumen: resumen, Tareas: tareas, fInicio: Timestamp.fromDate(new Date(finicio))
                 })
                 setExperienciaContext('')
                 mostrarModal(`Nueva experiencia agregada. Su ID es ${docRef.id}`)
             }
-
         } catch (error) {
             mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
             setError(error)
-
         } finally {
             setLoading(false)
         }
@@ -112,29 +97,24 @@ export const InterFormExperiencia = ({ objeto, tipo }) => {
         <>
             {loading ? <p><img src="../../../src/assets/circleSpinnWhite.svg" alt="" /></p> :
                 <form onSubmit={cargarDatos} className="formEditData">
-                    <h3>Id documento: {id}</h3>
+                    <h3>Id documento: {Id}</h3>
                     <label htmlFor="empresa">Empresa</label>
-                    <input type="text" id="empresa" name="empresa" value={empresa}
+                    <input type="text" name="empresa" value={empresa}
                         placeholder="Ingresar Empresa" onChange={actualizarDatos} />
-
                     <label htmlFor="area">Area</label>
-                    <input type="text" id="area" name="area"
+                    <input type="text" name="area"
                         placeholder="Ingresar area" value={area} onChange={actualizarDatos} />
-
                     <label htmlFor="resumen">Resumen</label>
-                    <input type="text" id="resumen" name="resumen" value={resumen}
+                    <input type="text" name="resumen" value={resumen}
                         placeholder="desde dd/mm/yyyy hasta dd/mm/yyyy o actualidad"
                         onChange={actualizarDatos} />
 
-                    {/*ACA ES EL TEMA del array*/}
-
                     <label htmlFor="finicio">Fecha inicio</label>
-                    <input type="date" id="finicio" name="finicio"
+                    <input type="date" name="finicio"
                         placeholder="Ingresar telefono fijo y/o celular" value={finicio} onChange={actualizarDatos} />
 
                     <label htmlFor="imagen">Seleccionar imagen</label>
-                    <input type="text" id="imagen" name="imagen"
-                        placeholder="imagen" value={imagen} onChange={actualizarDatos} />
+                    <input type="text" name="imagen" placeholder="imagen" value={imagen} onChange={actualizarDatos} />
 
                     <label htmlFor="">Tareas</label>
                     <ListadoItems items={tareas} metodo={actualizarTareas} />

@@ -63,35 +63,35 @@ export const FormInformacion = () => {
             <div className="displayForm">
                 <form onSubmit={cargarDatos} className="formEditData">
                     <label htmlFor="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" value={nombre} placeholder="Ingresar Nombre" onChange={actualizarDatos}></input>
+                    <input type="text" id="nombreInfo" name="nombre" value={nombre} placeholder="Ingresar Nombre" onChange={actualizarDatos}></input>
 
                     <label htmlFor="nacimiento">Fecha de nacimiento</label>
-                    <input type="text" id="nacimiento" name="nacimiento" placeholder="Ingresar Fecha de nacimiento toString()" value={nacimiento} onChange={actualizarDatos} />
+                    <input type="text" id="nacimientoInfo" name="nacimiento" placeholder="Ingresar Fecha de nacimiento toString()" value={nacimiento} onChange={actualizarDatos} />
 
                     <label htmlFor="estado">Estado</label>
-                    <input type="text" id="estado" name="estado" placeholder="Casado - Soltero - Concubinato" value={estado} onChange={actualizarDatos} />
+                    <input type="text" id="estadoInfo" name="estado" placeholder="Casado - Soltero - Concubinato" value={estado} onChange={actualizarDatos} />
 
                     <label htmlFor="nacionalidad">Nacionalidad</label>
-                    <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Argentino - Chileno - Colombiano - Brasilero ..." value={nacionalidad} onChange={actualizarDatos} />
+                    <input type="text" id="nacionalidadInfo" name="nacionalidad" placeholder="Argentino - Chileno - Colombiano - Brasilero ..." value={nacionalidad} onChange={actualizarDatos} />
 
                     <label htmlFor="conducir">Licencia de conducir</label>
-                    <input type="checkbox" id="conducir" name="conducir" checked={conducir === "Activa" ? true : false} onChange={actualizarDatos} />
+                    <input type="checkbox" id="conducirInfo" name="conducir" checked={conducir === "Activa" ? true : false} onChange={actualizarDatos} />
                     <div />
 
                     <label htmlFor="domicilio">Domicilio</label>
-                    <input type="text" id="domicilio" name="domicilio" placeholder="Ingresar calle y nro de domicilio" value={domicilio} onChange={actualizarDatos} />
+                    <input type="text" id="domicilioInfo" name="domicilio" placeholder="Ingresar calle y nro de domicilio" value={domicilio} onChange={actualizarDatos} />
 
                     <label htmlFor="telefono">Telefono</label>
-                    <input type="text" id="telefono" name="telefono" placeholder="Ingresar telefono fijo y/o celular" value={telefono} onChange={actualizarDatos} />
+                    <input type="text" id="telefonoInfo" name="telefono" placeholder="Ingresar telefono fijo y/o celular" value={telefono} onChange={actualizarDatos} />
 
                     <label htmlFor="email">e-mail</label>
-                    <input type="text" id="email" name="email" placeholder="Ingresar un correo electronico" value={email} onChange={actualizarDatos} />
+                    <input type="text" id="emailInfo" name="email" placeholder="Ingresar un correo electronico" value={email} onChange={actualizarDatos} />
 
                     <label htmlFor="linkedin">Linkedin direccion</label>
-                    <input type="text" id="linkedin" name="linkedin" placeholder="Agregar el link de linkedin para tu perfil" value={linkedin} onChange={actualizarDatos} />
+                    <input type="text" id="linkedinInfo" name="linkedin" placeholder="Agregar el link de linkedin para tu perfil" value={linkedin} onChange={actualizarDatos} />
 
                     <label htmlFor="github">gitHub direccion</label>
-                    <input type="text" id="github" name="github" placeholder="Agregar el link de linkedin para tu perfil" value={github} onChange={actualizarDatos} />
+                    <input type="text" id="githubInfo" name="github" placeholder="Agregar el link de linkedin para tu perfil" value={github} onChange={actualizarDatos} />
 
                     <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />
                 </form>

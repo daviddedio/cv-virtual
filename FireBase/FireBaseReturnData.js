@@ -1,8 +1,8 @@
 //import { useEffect, useState, useRef } from "react";
-import { getFirestore } from "firebase/firestore";
+import { addDoc, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -28,14 +28,18 @@ export const db = getFirestore(app);
 export const storage = getStorage(app)
 
 export const getSomeDataFromFirebase = async (tabla) => {
-    try {
-        const querySnapshot = await getDocs(collection(db, tabla));
-        return querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
-    } catch (error) {
-        return error
-    }
+    const querySnapshot = await getDocs(collection(db, tabla));
+    return querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
 }
 
 export const updateDocument = async (tabla, id, objeto) => {
-    await setDoc(doc(db, tabla, id), objeto )
+    await setDoc(doc(db, tabla, id), objeto)
+}
+
+export const addDocument = async (tabla, objeto) => {
+    return await addDoc(collection(db, tabla), objeto)
+}
+
+export const deleteDocument = async (tabla, id) => {
+    await deleteDoc(doc(db, tabla, id))
 }

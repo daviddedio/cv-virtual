@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react"
 import { Buscador, BuscadorSkeleton } from '../Buscador/Buscador'
 import { Context } from "../../context/Context"
-import { doc, setDoc, addDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
-import { db } from '../../FireBase/FireBaseReturnData';
 import { useModalContext } from "../modal/context/ModalContext";
 import { CustomAlert } from "../Alerta/CustomAlert";
 import { Timestamp } from "firebase/firestore"
+import { getSomeDataFromFirebase, updateDocument, addDocument, deleteDocument } from "../../FireBase/FireBaseReturnData";
+import { cargarCat, settear } from "../../Utilidades/Utilidades";
 
 export const FormCursos = () => {
     const { setComponente, setState } = useModalContext()
@@ -29,34 +29,27 @@ export const FormCursos = () => {
         })
     }
 
-    const cargarCategorias = (datos) => {
-        const result = [];
-        datos.forEach((it) => {
-            if (!result.includes(it.Nombre)) {
-                result.push(it.Nombre);
-            }
-        })
-        setCategorias(result.sort(function (a, b) {
-            if (a < b) { return -1; }
-            if (a > b) { return 1; }
-            return 0;
-        }))
-    }
-
     const getDataFromFirebase = async () => {
         if (cursosContext) {
-            setCurso(cursosContext)
-            cargarCategorias(cursosContext)
+            let temp = cursosContext.sort(function (a, b) {
+                if (a.Nombre < b.Nombre) { return -1; }
+                if (a.Nombre > b.Nombre) { return 1; }
+                return 0;
+            })
+            setCurso(temp)
+            cargarCat(temp, setCategorias, "Nombre")
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Cursos"));
-            const data = querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
-            cargarCategorias(data)
-            setData(data.sort((a, b) => b.Orden - a.Orden))
-            setCurso(data)
-            setCursosContext(data)
+            const datos = await getSomeDataFromFirebase("Cursos")
+            let temp = datos.sort(function (a, b) {
+                if (a.Nombre < b.Nombre) { return -1; }
+                if (a.Nombre > b.Nombre) { return 1; }
+                return 0;
+            })
+            cargarCat(temp, setCategorias, "Nombre")
+            settear([setData, setCurso, setCursosContext], temp)
         } catch (error) {
             console.log(error)
             setError(error)
@@ -65,15 +58,8 @@ export const FormCursos = () => {
         }
     }
 
-    useEffect(() => {
-        getDataFromFirebase()
-
-    }, [])
-
     const modoEditarDatos = (value) => {
-        
         const datoSeleccionado = curso.filter(item => item.Nombre === value)
-        console.log(datoSeleccionado)
         if (value === 'todo') {
             setInputForm(
                 {
@@ -111,19 +97,18 @@ export const FormCursos = () => {
         setLoading(true)
         try {
             if (id === 'New') {
-                console.log(inputForm)
-                const docRef = await addDoc(collection(db, "Cursos"), {
+                const docRef = await addDocument("Cursos", {
                     Nombre: nombre
                     , Informacion: informacion
                     , Categoria: categoria
                     , Comentarios: comentario
                     , FotoDir: fotodir
                     , fInicio: Timestamp.fromDate(new Date(finicio))
-                })
+                } )
                 setCursosContext('')
                 mostrarModal(`Nuevo curso agregado. Su ID es ${docRef.id}`)
             } else {
-                await setDoc(doc(db, "Cursos", id), {
+                await updateDocument("Cursos", id, {
                     Nombre: nombre
                     , Informacion: informacion
                     , Categoria: categoria
@@ -131,7 +116,6 @@ export const FormCursos = () => {
                     , FotoDir: fotodir
                     , fInicio: Timestamp.fromDate(new Date(finicio))
                 })
-                //throw new error
                 setCursosContext('')
                 mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             }
@@ -146,27 +130,30 @@ export const FormCursos = () => {
     }
 
     const borrarDato = async (e) => {
-            e.preventDefault()
-            if (id==="New" || id===''){
-                alert('Es un nuevo documento') 
-                return
-            }
-
-            var status = confirm(`seguro que quieres borrar este documento ${id} - ${nombre}?`)
-            if (status === true) {
-                setLoading(true)
-                try {
-                    await deleteDoc(doc(db, "Cursos", id))
-                    setCursosContext('')
-                    mostrarModal("Dato eliminado correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
-                } catch (error) {
-                    mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
-                    setError(error)
-                }finally{
-                    setLoading(false)
-                }
+        e.preventDefault()
+        if (id === "New" || id === '') {
+            alert('Es un nuevo documento')
+            return
+        }
+        var status = confirm(`seguro que quieres borrar este documento ${id} - ${nombre}?`)
+        if (status === true) {
+            setLoading(true)
+            try {
+                await deleteDocument("Cursos", id)
+                setCursosContext('')
+                mostrarModal("Dato eliminado correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
+            } catch (error) {
+                mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
+                setError(error)
+            } finally {
+                setLoading(false)
             }
         }
+    }
+
+    useEffect(() => {
+        getDataFromFirebase()
+    }, [cursosContext])
 
     return (
         <>
@@ -184,7 +171,7 @@ export const FormCursos = () => {
                     </div>
                     <label htmlFor="nombre">Nombre</label>
                     <input type="text"
-                        id="nombre"
+                        id="nombreCurso"
                         name="nombre"
                         value={nombre}
                         placeholder="Ingresar Nombre de estudio"
@@ -192,22 +179,22 @@ export const FormCursos = () => {
 
                     <label htmlFor="informacion">Informacion</label>
                     <input type="text"
-                        id="informacion"
+                        id="informacionCurso"
                         name="informacion"
                         placeholder="Ingresar orden"
                         value={informacion} onChange={actualizarDatos} />
 
                     <label htmlFor="categoria">Categoria</label>
-                    <input type="text" id="categoria" name="categoria" placeholder="Nombre Universidad" value={categoria} onChange={actualizarDatos} />
+                    <input type="text" id="categoriaCurso" name="categoria" placeholder="Nombre Universidad" value={categoria} onChange={actualizarDatos} />
 
                     <label htmlFor="comentario">comentario</label>
-                    <input type="text" id="comentario" name="comentario" placeholder="comentario" value={comentario} onChange={actualizarDatos} />
+                    <input type="text" id="comentarioCurso" name="comentario" placeholder="comentario" value={comentario} onChange={actualizarDatos} />
 
                     <label htmlFor="fotodir">ImagenURL</label>
-                    <input type="text" id="fotodir" name="fotodir" placeholder="Ingresar direccion de imagen" value={fotodir} onChange={actualizarDatos} />
+                    <input type="text" id="fotodirCurso" name="fotodir" placeholder="Ingresar direccion de imagen" value={fotodir} onChange={actualizarDatos} />
 
                     <label htmlFor="finicio">Fecha inicio</label>
-                    <input type="date" id="finicio" name="finicio"
+                    <input type="date" id="finicioCurso" name="finicio"
                         placeholder="Ingresar telefono fijo y/o celular" value={finicio} onChange={actualizarDatos} />
 
                     <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />

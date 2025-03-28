@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 import { Buscador, BuscadorSkeleton } from '../Buscador/Buscador'
 import { Context } from "../../context/Context"
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import { db } from '../../FireBase/FireBaseReturnData';
+import { getSomeDataFromFirebase, updateDocument, addDocument, deleteDocument } from "../../FireBase/FireBaseReturnData";
+import { settear, cargarCat } from "../../Utilidades/Utilidades";
 import { useModalContext } from "../modal/context/ModalContext";
 import { CustomAlert } from "../Alerta/CustomAlert";
 
@@ -33,32 +33,19 @@ export const FormEstudios = () => {
         })
     }
 
-    const cargarCategorias = (datos) => {
-        const result = [];
-        datos.forEach((it) => {
-            if (!result.includes(it.Nombre)) {
-                result.push(it.Nombre);
-            }
-        })
-        setCategorias(result)
-    }
-
     const getDataFromFirebase = async () => {
         if (estudiosContext) {
             setEstudios(estudiosContext)
-            cargarCategorias(estudiosContext)
+            cargarCat(estudiosContext, setCategorias, "Nombre")
             return
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Estudios"));
-            const data = querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
-            cargarCategorias(data)
-            setData(data.sort((a, b) => b.Orden - a.Orden))
-            setEstudios(data)
-            setEstudiosContext(data)
+            const datos = await getSomeDataFromFirebase("Estudios")
+            const datosOrdenados = datos.sort((a, b) => b.Orden - a.Orden)
+            settear([setData, setEstudios, setEstudiosContext], datosOrdenados)
+            cargarCat(datosOrdenados, setCategorias, "Nombre")
         } catch (error) {
-            console.log(error)
             setError(error)
         } finally {
             setLoading(false)
@@ -67,7 +54,6 @@ export const FormEstudios = () => {
 
     useEffect(() => {
         getDataFromFirebase()
-
     }, [])
 
     const modoEditarDatos = (value) => {
@@ -105,11 +91,10 @@ export const FormEstudios = () => {
     const cargarDatos = async (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(id)
         try {
-            if (id) {
+            if (id === "New") {
                 console.log(inputForm)
-                const docRef = await addDoc(collection(db, "Estudios"), {
+                const docRef = await addDocument("Estudios", {
                     Imagen: imagen,
                     Info: info,
                     Nombre: nombre,
@@ -119,22 +104,19 @@ export const FormEstudios = () => {
                 setEstudiosContext('')
                 mostrarModal(`Nuevo estudio agregado. Su ID es ${docRef.id}`)
             } else {
-                await setDoc(doc(db, "Estudios", id), {
+                await updateDocument("Estudios", id, {
                     Imagen: imagen,
                     Info: info,
                     Nombre: nombre,
                     Orden: orden,
                     Universidad: universidad
                 })
-                //throw new error
                 setEstudiosContext('')
                 mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
             }
         } catch (error) {
             mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
             setError(error)
-            console.log(error)
-
         } finally {
             setLoading(false)
         }
@@ -142,7 +124,20 @@ export const FormEstudios = () => {
 
     const deleteEstudio = (e) => {
         e.preventDefault()
-        alert('eliminando')
+        var status = confirm(`seguro que quieres borrar este documento ${id} - ${nombre}?`)
+        if (status === true) {
+            setLoading(true)
+            try {
+                deleteDocument("Estudios", id)
+                setEstudiosContext("")
+                mostrarModal("Datos eliminados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
+            } catch (error) {
+                mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
+                setError(error)
+            }finally{
+                setLoading(false)
+            }
+        }
     }
 
     return (
@@ -161,7 +156,7 @@ export const FormEstudios = () => {
                     </div>
                     <label htmlFor="nombre">Nombre</label>
                     <input type="text"
-                        id="nombre"
+                        id="nombreEst"
                         name="nombre"
                         value={nombre}
                         placeholder="Ingresar Nombre de estudio"
@@ -169,19 +164,19 @@ export const FormEstudios = () => {
 
                     <label htmlFor="orden">Orden</label>
                     <input type="text"
-                        id="orden"
+                        id="ordenEst"
                         name="orden"
                         placeholder="Ingresar orden"
                         value={orden} onChange={actualizarDatos} />
 
                     <label htmlFor="universidad">Universidad</label>
-                    <input type="text" id="universidad" name="universidad" placeholder="Nombre Universidad" value={universidad} onChange={actualizarDatos} />
+                    <input type="text" id="universidadEst" name="universidad" placeholder="Nombre Universidad" value={universidad} onChange={actualizarDatos} />
 
                     <label htmlFor="info">Informacion</label>
-                    <input type="text" id="info" name="info" placeholder="Fecha de ingreso - Fecha de finalizacion : Titulo intermedio" value={info} onChange={actualizarDatos} />
+                    <input type="text" id="infoEst" name="info" placeholder="Fecha de ingreso - Fecha de finalizacion : Titulo intermedio" value={info} onChange={actualizarDatos} />
 
                     <label htmlFor="imagen">ImagenURL</label>
-                    <input type="text" id="imagen" name="imagen" placeholder="Ingresar direccion de imagen" value={imagen} onChange={actualizarDatos} />
+                    <input type="text" id="imagenEst" name="imagen" placeholder="Ingresar direccion de imagen" value={imagen} onChange={actualizarDatos} />
 
                     <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />
                 </form>

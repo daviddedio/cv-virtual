@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
 import { DataRow } from "../DataRow/DataRow"
 import { InterFormExperiencia } from "../FormulariosInternos/Experiencia/InterFormExperiencia";
+import { getSomeDataFromFirebase,updateDocument } from "../../FireBase/FireBaseReturnData";
+import { settear } from "../../Utilidades/Utilidades";
 
 export const FormExperiencia = () => {
 
@@ -36,11 +36,8 @@ export const FormExperiencia = () => {
         }
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Experiencia"));
-            const data = querySnapshot.docs.map(doc => Object.assign({ Id: doc.id }, doc.data()))
-            setData(data.sort((a, b) => b.fInicio.seconds - a.fInicio.seconds))
-            setExperiencia(data)
-            setExperienciaContext(data)
+            const datos = await getSomeDataFromFirebase("Experiencia")
+            settear([setData,setExperiencia, setExperienciaContext],datos)
         } catch (error) {
             setError(error)
         } finally {
