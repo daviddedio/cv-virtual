@@ -2,7 +2,7 @@ import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/Gene
 import { useState, useEffect, useContext } from "react";
 import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
-import { Carrusel } from "../../componentes/carrusel/Carrusel";
+import { CardPresentation } from "../../componentes/CardPresentation/CardPresentation";
 
 import "./InformacionPage.css"
 
@@ -55,21 +55,19 @@ export const InformacionPage = () => {
     return (
         <div className="infoConteiner">
             <div className="AllTableContainer">
-                <div className="imgConteiner">
-                    <img className="imgPhoto" src="https://media.licdn.com/dms/image/v2/C4D03AQE_LBZZGaTIjw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1524490233489?e=1744848000&v=beta&t=HBLUMzvA70WgAOHynJDLNEM5Pv3-rgJvQ7xnKrHAR4w" alt="" />
-                </div>
                 {
                     loading ?
                         <>
                             <GeneralTableSkeleton title={"Informacion General"} count={5} />
-                            <GeneralTableSkeleton title={"Informacion de contacto"} count={3} />
-                            <GeneralTableSkeleton title={"Redes"} count={2} />
+                            {/*<GeneralTableSkeleton title={"Informacion de contacto"} count={3} />
+                            <GeneralTableSkeleton title={"Redes"} count={2} />*/}
                         </>
                         :
                         <>
-                            <GeneralTable data={dataInfo} title={"Informacion General"} />
+                            {/*<GeneralTable data={dataInfo} title={"Informacion General"} />
                             <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
-                            <GeneralTable data={dataRedes} title={"Redes"} />
+                            <GeneralTable data={dataRedes} title={"Redes"} />*/}
+                            <CardPresentation nombre={dataInfo["Nombre"]} nacionalidad={dataInfo["Nacionalidad"]} licencia={dataInfo["Licencia de conducir"]} fecha={dataInfo["Fecha nacimiento"]} estado={dataInfo["Estado Civil"]} />
                         </>
                 }
                 <hr />
