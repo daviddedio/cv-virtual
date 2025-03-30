@@ -4,13 +4,10 @@
     margin: 5px;
     padding: 1px;
     border: black 1px solid;
-    border-radius: 10px;
-
 }
 
 .knowCardConteinter:hover{
-    background-color:#04AA6D ;
-    color: white;
+    background-color:#2bff00 ;
 }
 
 .knowCardConteinter>h3,p{

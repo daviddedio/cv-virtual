@@ -1,6 +1,6 @@
 .cursoConteiner:hover{
-    background-color: #04AA6D;
-    color: white;
+    background-color: #2bff00;
+    transition: background-color 1s;
 }
 
 .datosConteinerCurso {

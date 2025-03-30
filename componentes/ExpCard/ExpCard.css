@@ -1,11 +1,11 @@
 .exptCard {
     border: 1px solid black;
-    border-radius: 10px;
     margin: 10px 1px
 }
 
 .exptCard:hover{
-    box-shadow: 4px 4px 4px 4px gray;
+    box-shadow: 5px 5px;
+    transition: box-shadow 0.5s;
 }
 
 .expHeader {
@@ -20,7 +20,6 @@
     object-fit: cover;
     width: 150px;
     height: 100%;
-    border-radius: 25px 0px 0px 25px;
     margin-left: 10px;
 }
 
@@ -31,7 +30,6 @@
 .ECdataConteiner>h2 {
     margin: 0px 0px 5px 0px;
     text-decoration: underline;
-
 }
 
 .ECdataConteiner>h3 {

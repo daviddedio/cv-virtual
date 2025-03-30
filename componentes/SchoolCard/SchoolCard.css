@@ -4,10 +4,14 @@
     margin: 10px;
     padding: 10px;
     border: 1px solid black;
-    border-radius: 10px;
     display: flexbox;
     display: flex;
     align-items: stretch;
+}
+
+.schoolCard:hover{
+    box-shadow: 5px 5px;
+    transition: box-shadow 0.5s;
 }
 
 .SCdataConteiner {
@@ -28,5 +32,4 @@
     object-fit: cover;
     width: 250px;
     height: 100%;
-    border-radius: 25px 0px 0px 25px;
 }
