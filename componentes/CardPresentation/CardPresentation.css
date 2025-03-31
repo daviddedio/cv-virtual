@@ -16,7 +16,7 @@
 }
 
 .pcard[data-state="#about"] {
-    height: 450px;
+    height: 750px;
 
     .card-main {
         padding-top: 0;
@@ -86,7 +86,7 @@
     filter: blur(1px);
     transform: scale(1.2);
     transition: 0.5s;
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/cvelectronicodediodavid.appspot.com/o/NoImagen.jpg?alt=media&token=2b1e3d3d-6391-4eb4-b7d1-6ae546790fea");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/cvelectronicodediodavid.appspot.com/o/herosrcvertical.png?alt=media&token=e2147b34-f103-44db-aa70-c9e71890b488");
 }
 
 .pcard-avatar {
@@ -105,7 +105,7 @@
 .pcard-fullname {
     position: absolute;
     bottom: 0;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
     text-align: center;
     white-space: nowrap;
@@ -117,7 +117,7 @@
 .pcard-jobtitle {
     position: absolute;
     bottom: 0;
-    font-size: 11px;
+    font-size: 14px;
     white-space: nowrap;
     font-weight: 500;
     opacity: 0.7;
@@ -139,7 +139,6 @@
 
 .pcard-subtitle {
     font-weight: 700;
-    font-size: 13px;
     margin-bottom: 8px;
 }
 
@@ -149,9 +148,23 @@
 
 .pcard-desc {
     line-height: 1.6;
-    color: #636b6f;
+    color: black;
     font-size: 14px;
     margin: 0;
     font-weight: 400;
     font-family: "DM Sans", sans-serif;
+}
+
+.ulInfo{
+    list-style: none;
+    padding: 0px;
+}
+.ulInfo>li>span{
+    font-weight: bold;
+}
+
+/*skeleton**************************/
+.skeleton {
+    animation: pulse 1.5s infinite ease-in-out;
+    width: 402px;
 }

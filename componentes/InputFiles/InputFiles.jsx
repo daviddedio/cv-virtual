@@ -9,7 +9,7 @@ export const InputFiles = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const { setComponente, setState } = useModalContext()
-    const [fileName, setFileName] = useState('https://firebasestorage.googleapis.com/v0/b/cvelectronicodediodavid.appspot.com/o/NoImagen.jpg?alt=media&token=842221fd-400f-4938-b99d-370eea0826da')
+    const [fileName, setFileName] = useState('')
     const [file, setFile] = useState(null)
 
     const uploadFile = async () => {

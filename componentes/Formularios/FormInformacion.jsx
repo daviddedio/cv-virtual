@@ -21,10 +21,11 @@ export const FormInformacion = () => {
         telefono: infoContextContacto['Telefono'],
         email: infoContextContacto['Email'],
         linkedin: infoContextRedes["Linkedin"],
-        github: infoContextRedes['GitHub']
+        github: infoContextRedes['GitHub'],
+        presentacion: infoContextInicial['Presentacion']
     })
 
-    const { nombre, nacimiento, estado, nacionalidad, conducir, domicilio, telefono, email, linkedin, github } = inputForm
+    const { nombre, nacimiento, estado, nacionalidad, conducir, domicilio, telefono, email, linkedin, github, presentacion } = inputForm
 
     const actualizarDatos = ({ target }) => {
         const { name, value, type, checked } = target
@@ -38,7 +39,7 @@ export const FormInformacion = () => {
         setLoading(true)
         try {
             await updateDocument("InfoPersonal", "Contacto", { Domicilio: domicilio, Email: email, Telefono: telefono })
-            await updateDocument("InfoPersonal", "Inicial", { ["Estado Civil"]: estado, ["Fecha Nacimiento"]: nacimiento, ["Licencia de conducir"]: conducir, Nacionalidad: nacionalidad, Nombre: nombre })
+            await updateDocument("InfoPersonal", "Inicial", { ["Estado Civil"]: estado, ["Fecha Nacimiento"]: nacimiento, ["Licencia de conducir"]: conducir, Nacionalidad: nacionalidad, Nombre: nombre, Presentacion:presentacion })
             await updateDocument("InfoPersonal", "Redes", { GitHub: github, Linkedin: linkedin, })
             mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
         } catch (error) {
@@ -92,6 +93,9 @@ export const FormInformacion = () => {
 
                     <label htmlFor="github">gitHub direccion</label>
                     <input type="text" id="githubInfo" name="github" placeholder="Agregar el link de linkedin para tu perfil" value={github} onChange={actualizarDatos} />
+
+                    <label htmlFor="presentacion">Presentacion</label>
+                    <input type="text" id="presentacion" name="presentacion" placeholder="presentacion" value={presentacion} onChange={actualizarDatos} />
 
                     <input className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`} type="submit" value={loading ? "Uploading..." : (error ? "Error..." : "submit")} />
                 </form>

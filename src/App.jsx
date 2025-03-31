@@ -7,6 +7,7 @@ import { Experiencia } from '../routes/Experiencia'
 import { InformacionPage } from '../pages/informacion/InformacionPage'
 import { Modal } from '../componentes/modal/Modal'
 import { UpdateInformacion } from '../routes/UpdateInformacion'
+import { Footer } from '../componentes/Footer/Footer'
 import { Context } from '../context/Context'
 import './App.css'
 import { useContext } from 'react'
@@ -19,7 +20,6 @@ export const App = () => {
       <div className="hero-image">
         <div className="hero-text">
           <h1 className='h1style'>CV Virtual</h1>
-          <p>Lic. De Dio, David Emanuel</p>
         </div>
       </div>
       <NavBarCv />
@@ -40,9 +40,7 @@ export const App = () => {
         </div>
       </div>
       <Modal />
-      <div className="footer-img">
-        Footer
-      </div>
+      <Footer/>
     </>
   )
 }

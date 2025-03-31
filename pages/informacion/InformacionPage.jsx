@@ -2,7 +2,7 @@ import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/Gene
 import { useState, useEffect, useContext } from "react";
 import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
-import { CardPresentation } from "../../componentes/CardPresentation/CardPresentation";
+import { CardPresentation, CardPresentationSkeleton } from "../../componentes/CardPresentation/CardPresentation";
 
 import "./InformacionPage.css"
 
@@ -28,15 +28,10 @@ export const InformacionPage = () => {
         setLoading(true)
         try {
             const datos = await getSomeDataFromFirebase('InfoPersonal')
-
             setDataInfo(datos[1])
             setDataLocalizacion(datos[0])
-            setDataRedes(datos[2])
-
             setInfoContextContacto(datos[0])
             setInfoContextInicial(datos[1])
-            setInfoContextRedes(datos[2])
-
         } catch (error) {
             setError(error)
         } finally {
@@ -58,24 +53,14 @@ export const InformacionPage = () => {
                 {
                     loading ?
                         <>
-                            <GeneralTableSkeleton title={"Informacion General"} count={5} />
-                            {/*<GeneralTableSkeleton title={"Informacion de contacto"} count={3} />
-                            <GeneralTableSkeleton title={"Redes"} count={2} />*/}
+                            <CardPresentationSkeleton/>
                         </>
                         :
                         <>
-                            {/*<GeneralTable data={dataInfo} title={"Informacion General"} />
-                            <GeneralTable data={dataLocalizacion} title={"Informacion de contacto"} />
-                            <GeneralTable data={dataRedes} title={"Redes"} />*/}
-                            <CardPresentation nombre={dataInfo["Nombre"]} nacionalidad={dataInfo["Nacionalidad"]} licencia={dataInfo["Licencia de conducir"]} fecha={dataInfo["Fecha nacimiento"]} estado={dataInfo["Estado Civil"]} />
+                            <CardPresentation nombre={dataInfo["Nombre"]} nacionalidad={dataInfo["Nacionalidad"]} licencia={dataInfo["Licencia de conducir"]} fecha={dataInfo["Fecha Nacimiento"]} estado={dataInfo["Estado Civil"]} presentacion={dataInfo["Presentacion"]} domicilio={dataLocalizacion["Domicilio"]} telefono={dataLocalizacion["Telefono"]} correo={dataLocalizacion["Email"]} />
                         </>
                 }
                 <hr />
-                {/*<h2>Imagenes</h2>
-                <div className="IPimageConteiner">
-                    <img src="https://scontent.fros6-1.fna.fbcdn.net/v/t1.6435-9/65370959_10218963631790757_6405998598781140992_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGpNN5xuWgHsXJQ2HPjHQqIhLM5ESujdn-EszkRK6N2f7af-gnQiQsGXi1Y7j-reEM&_nc_ohc=gOhDsOSSNVAQ7kNvgGxUUhY&_nc_zt=23&_nc_ht=scontent.fros6-1.fna&_nc_gid=Al_WterBDIfQhXnea7QexEV&oh=00_AYArlo1THq7DGePz2WPOGIXqx7uB9u0doSpH5ZNah88kXg&oe=67DA0385" alt="" />
-                    <img src="https://media.licdn.com/dms/image/v2/D4D22AQFjCtECk4iSmg/feedshare-shrink_800/feedshare-shrink_800/0/1702040901269?e=1742428800&v=beta&t=2_dQDdXBVno3-FZxvnVM4T2RRycz8qDyLBudlHqaOKA" alt="" />
-                </div>*/}
             </div>
         </div>
     )
