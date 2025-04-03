@@ -1,4 +1,3 @@
-import { GeneralTable, GeneralTableSkeleton } from "../../componentes/Table/GeneralTable"
 import { useState, useEffect, useContext } from "react";
 import { getSomeDataFromFirebase } from '../../FireBase/FireBaseReturnData'
 import { Context } from '../../context/Context'
@@ -30,7 +29,9 @@ export const InformacionPage = () => {
             const datos = await getSomeDataFromFirebase('InfoPersonal')
             setDataInfo(datos[1])
             setDataLocalizacion(datos[0])
+            setDataRedes(datos[2])
             setInfoContextContacto(datos[0])
+            setInfoContextRedes(datos[2])
             setInfoContextInicial(datos[1])
         } catch (error) {
             setError(error)

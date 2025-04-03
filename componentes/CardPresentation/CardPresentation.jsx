@@ -3,7 +3,7 @@ import './CardPresentation.css'
 export const CardPresentation = ({nombre, nacionalidad, licencia, fecha, estado, presentacion, domicilio, telefono, correo}) => {
     return (
         <>
-            <div className="pcard" data-state="#about">
+            <div className="pcard card" data-state="#about">
                 <div className="pcard-header">
                     <div className="pcard-cover">
                     </div>

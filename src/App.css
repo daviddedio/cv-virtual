@@ -1,11 +1,4 @@
-.bigContainer {
-    width: 95%;
-    margin: auto;
-    display: grid;
-    grid:
-        "sidebar body" 1fr / auto 1fr;
-    gap: 8px;
-}
+
 
 .sidebar {
     grid-area: sidebar;
@@ -13,6 +6,9 @@
 
 .body {
     grid-area: body;
+    height: 800px;
+    overflow: hidden scroll;
+    margin: 5px;
 }
 
 .hero-image {
@@ -40,8 +36,46 @@
     color: white;
 }
 
-.h1style{
-    font-size:68px;
+.h1style {
+    font-size: 68px;
 }
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .bigContainer {
+        width: 100%;
 
+        display: grid;
+        grid:
+            "hero" auto "options" auto  "card" 1fr "body" auto "footer" auto / 1fr;
+        gap: 8px;
+    }
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    .bigContainer {
+        width: 95%;
+        margin: auto;
+        display: grid;
+        grid:
+            "sidebar body" 1fr / auto 1fr;
+        gap: 8px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

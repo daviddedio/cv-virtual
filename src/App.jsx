@@ -17,7 +17,7 @@ export const App = () => {
   const { login } = useContext(Context)
   return (
     <>
-      <div className="hero-image">
+      <div className="hero-image hero">
         <div className="hero-text">
           <h1 className='h1style'>CV Virtual</h1>
         </div>

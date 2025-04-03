@@ -3,6 +3,7 @@ import { addDoc, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -26,6 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app)
+export const auth = getAuth(app)
 
 export const getSomeDataFromFirebase = async (tabla) => {
     const querySnapshot = await getDocs(collection(db, tabla));
@@ -42,4 +44,12 @@ export const addDocument = async (tabla, objeto) => {
 
 export const deleteDocument = async (tabla, id) => {
     await deleteDoc(doc(db, tabla, id))
+}
+
+export const loginApp = async (usuario, password) => {
+    return await signInWithEmailAndPassword(auth, usuario, password)
+}
+
+export const loginOut = async () => {
+    await signOut(auth)
 }

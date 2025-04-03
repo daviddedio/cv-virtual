@@ -1,10 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../../context/Context'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../FireBase/FireBaseReturnData'
 import { useModalContext } from '../../componentes/modal/context/ModalContext'
 import { CustomAlert } from '../Alerta/CustomAlert';
+import { loginApp, loginOut } from '../../FireBase/FireBaseReturnData';
 import './NavBarCv.css'
 
 export const NavBarCv = () => {
@@ -41,35 +40,33 @@ export const NavBarCv = () => {
 
     const logIn = async (e, arr) => {
         e.preventDefault()
-        //console.log('corregir el login file 44 NavBarCV')
+
         setLoading(true)
         try {
-            const querySnapshot = await getDocs(collection(db, "Login"));
-            const data = querySnapshot.docs.map(doc => doc.data())
-            //setData(data)
-            if (data[0].User === username & data[0].Password == password) {
-                setLogin(!login)
-                setVisible(arr)
-            } else {
-                throw "Datos erroneos"
-            }
+            const datos = await loginApp(username, password)
+            setLogin(!login)
+            setVisible(arr)
+            mostrarModal("Login correcto", 0)
         } catch (error) {
-            mostrarModal(error, 2)
+            mostrarModal(error.message, 2)
         } finally {
             setLoading(false)
         }
-
-        //Este fragmento debe comentarse
-        /*setLogin(!login)
-        setVisible(arr)*/
     }
 
-    const logOut = (e, arr) => {
+    const logOut = async (e, arr) => {
         e.preventDefault()
-        setVisible(arr)
-        setLogin(!login)
-        setFormulario({ username: '', password: '' })
-
+        setLoading(true)
+        try {
+            await loginOut()
+            setLogin(!login)
+            setVisible(arr)
+            mostrarModal("Log out correcto", 0)
+        } catch (error) {
+            mostrarModal(error.message, 2)
+        }finally{
+            setLoading(false)
+        }
     }
 
     const mostrarModal = (mensaje, type) => {
@@ -90,7 +87,7 @@ export const NavBarCv = () => {
     }, [])
 
     return (
-        <div className="navbar">
+        <div className="navbar options">
 
             <NavLink className={estudio} onClick={() => { activar('estudio') }} id='estudios' to='/estudios'><i className="fa fa-fw fa-book"></i> <span>estudios</span></NavLink>
             <NavLink className={experiencia} onClick={() => { activar('experiencia') }} id='experiencia' to='/experiencia'><i className="fa fa-fw fa-sheet-plastic"></i> <span>experiencia</span></NavLink>

@@ -1,6 +1,5 @@
 .schoolCard {
     width: 90%;
-    height: 150px;
     margin: 10px;
     padding: 10px;
     border: 1px solid black;
@@ -9,7 +8,7 @@
     align-items: stretch;
 }
 
-.schoolCard:hover{
+.schoolCard:hover {
     box-shadow: 5px 5px;
     transition: box-shadow 0.5s;
 }
@@ -32,4 +31,32 @@
     object-fit: cover;
     width: 250px;
     height: 100%;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .schoolCard {
+        height: 300px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .schoolCard {
+        height: 400px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .schoolCard {
+        height: 200px;
+    }
 }

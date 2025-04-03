@@ -30,13 +30,14 @@ export const Footer = () => {
     }, [])
 
     return (
-        <div className="footer-img">
-            <h3>Redes</h3>
-            <ul>
+        <div className="footer-img footer">
+            <h3>Redes y descarga de CV</h3>
+            <ul className="footerList">
                 {loading ? "cargando" :
                     <>
-                        <li>Linkedin: <a href={array["Linkedin"]}>Linkedin</a></li>
-                        <li>GitHub: <a href={array["GitHub"]}>GitHub</a></li>
+                        <li className="linka"><i className="fa-brands fa-linkedin fa-xl"/> Linkedin: <a href={array["Linkedin"]} target="_blank">Link</a></li>
+                        <li className="linka"><i className="fa-brands fa-github fa-xl"/> GitHub: <a href={array["GitHub"]} target="_blank">Link</a></li>
+                        <li className="linka"><i className="fa-solid fa-file-arrow-down fa-xl"/> Descarga CV: <a href="David CV.pdf" target="_blank">Link</a></li>
                     </>
                 }
             </ul>

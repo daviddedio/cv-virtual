@@ -3,7 +3,7 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url("/footer.jpg");
 
     /* Set a specific height */
-    height: 100px;
+    height: 150px;
 
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
@@ -16,12 +16,20 @@
     color: white;
     padding-left: 25px;
     padding-top: 10px;
+    margin-bottom: 0px;
 }
 
 .footer-img>ul{
     color:white
 }
 
-a:link{
+.linka>a:link{
     color:aqua
+}
+.linka{
+    margin-bottom: 10px;
+}
+
+.footerList{
+    list-style: none;
 }

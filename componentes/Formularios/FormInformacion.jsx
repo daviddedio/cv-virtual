@@ -40,10 +40,10 @@ export const FormInformacion = () => {
         try {
             await updateDocument("InfoPersonal", "Contacto", { Domicilio: domicilio, Email: email, Telefono: telefono })
             await updateDocument("InfoPersonal", "Inicial", { ["Estado Civil"]: estado, ["Fecha Nacimiento"]: nacimiento, ["Licencia de conducir"]: conducir, Nacionalidad: nacionalidad, Nombre: nombre, Presentacion:presentacion })
-            await updateDocument("InfoPersonal", "Redes", { GitHub: github, Linkedin: linkedin, })
+            await updateDocument("InfoPersonal", "Redes", { GitHub: github, Linkedin: linkedin})
             mostrarModal("Datos cargados correctamente, refrescar la pagina para ver la actualizacion de estos datos", 0)
         } catch (error) {
-            mostrarModal("Ha ocurrido un error, refrescar la pagina para ver la actualizacion de estos datos", 3)
+            mostrarModal(error.message, 3)
             setError(error)
         } finally {
             setLoading(false)
