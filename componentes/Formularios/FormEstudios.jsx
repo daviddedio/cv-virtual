@@ -93,7 +93,6 @@ export const FormEstudios = () => {
         setLoading(true)
         try {
             if (id === "New") {
-                console.log(inputForm)
                 const docRef = await addDocument("Estudios", {
                     Imagen: imagen,
                     Info: info,

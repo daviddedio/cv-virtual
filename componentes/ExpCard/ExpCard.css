@@ -17,8 +17,8 @@
 
 .ECimgConteiner>img {
     object-fit: cover;
-    width: 150px;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     margin-left: 10px;
 }
 
@@ -73,7 +73,7 @@
 
 .longer{
     display: block;
-    max-height: 500px;
+    max-height: 800px;
 }
 
 .cardBody>button{
@@ -133,10 +133,11 @@
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 320px) {
     .expHeader {
         height: 350px;
     }
+    
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

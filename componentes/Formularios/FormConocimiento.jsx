@@ -106,8 +106,7 @@ export const FormConocimiento = () => {
             alert('Es un nuevo documento')
             return
         }
-
-        var status = confirm(`seguro que quieres borrar este documento ${id} - ${nombre}?`)
+        var status = confirm(`seguro que quieres borrar este documento ${id} - ${con}?`)
         if (status === true) {
             setLoading(true)
             try {

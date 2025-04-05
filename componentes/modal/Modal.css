@@ -13,26 +13,25 @@
     z-index: 999;
 }
 
-.imagenCurso>img{
+/*.imagenCurso>img {
     width: 650px;
     box-shadow: 10px 10px;
 }
 
-.imagenCurso{
+.imagenCurso {
     position: absolute;
     z-index: 100;
     top: 10%;
     left: 25%;
 }
 
-.loadingImg{
+.loadingImg {
     position: absolute;
     margin: auto;
+}*/
+
+.modalx {
+    text-align: center;
+    line-height: 50%;
 }
-.modalx{
-    border: 1px solid black;
-}
-
-
-
 

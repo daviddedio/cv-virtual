@@ -1,3 +1,4 @@
+import './ImagenComponent.css'
 export const ImagenComponent = ({imagen}) => {
     return( 
         <div className="imagenComponentConteiner">

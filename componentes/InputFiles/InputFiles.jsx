@@ -1,8 +1,7 @@
 import { useState, useContext } from "react"
-import { storage } from "../../FireBase/FireBaseReturnData"
-import { uploadBytes, ref, getDownloadURL } from "firebase/storage"
 import { useModalContext } from "../modal/context/ModalContext"
 import { CustomAlert } from "../Alerta/CustomAlert"
+import { uploadFileToStorage } from "../../FireBase/FireBaseReturnData"
 import './InputFiles.css'
 
 export const InputFiles = () => {
@@ -17,11 +16,9 @@ export const InputFiles = () => {
             mostrarModal(`No hay un archivo seleccionado`, 2)
             return 
         }
-        const storageRef = ref(storage, fileName)
         try {
             setLoading(true)
-            await uploadBytes(storageRef, file)
-            const url = await getDownloadURL(storageRef)
+            const url = await uploadFileToStorage(file, file.name)
             setFileName(url)
             mostrarModal("Imagen cargada correctamente", 0)
         } catch (error) {
@@ -42,13 +39,17 @@ export const InputFiles = () => {
         setState(true)
     }
 
+    const setFileAndFileName = (e)=>{
+        setFile(e.target.files[0])
+    }
+
     return (
         <form onSubmit={uploadImg} className="uploadForm">
             <input
                 type="file"
                 name=""
                 id=""
-                onChange={e => setFile(e.target.files[0])} />
+                onChange={setFileAndFileName} />
             <input
                 className={`btnSubmit ${loading && `uploading`} ${error && `uploadingError`}`}
                 type="submit"

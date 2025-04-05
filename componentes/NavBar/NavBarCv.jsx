@@ -89,10 +89,10 @@ export const NavBarCv = () => {
     return (
         <div className="navbar options">
 
-            <NavLink className={estudio} onClick={() => { activar('estudio') }} id='estudios' to='/estudios'><i className="fa fa-fw fa-book"></i> <span>estudios</span></NavLink>
-            <NavLink className={experiencia} onClick={() => { activar('experiencia') }} id='experiencia' to='/experiencia'><i className="fa fa-fw fa-sheet-plastic"></i> <span>experiencia</span></NavLink>
-            <NavLink className={cursos} onClick={() => { activar('cursos') }} id='cursos' to='/cursos'><i className="fa fa-fw fa-certificate"></i> <span>cursos</span></NavLink>
-            <NavLink className={conocimiento} onClick={() => { activar('conocimiento') }} id='conocimientos' to='/conocimientos'><i className="fa fa-fw fa-star"></i> <span>conocimientos</span></NavLink>
+            <NavLink className={estudio} onClick={() => { activar('estudio') }} id='estudios' to='/estudios'><i className="fa fa-fw fa-book"></i> <span className='spanName'>estudios</span></NavLink>
+            <NavLink className={experiencia} onClick={() => { activar('experiencia') }} id='experiencia' to='/experiencia'><i className="fa fa-fw fa-sheet-plastic"></i> <span className='spanName'>experiencia</span></NavLink>
+            <NavLink className={cursos} onClick={() => { activar('cursos') }} id='cursos' to='/cursos'><i className="fa fa-fw fa-certificate"></i> <span className='spanName'>cursos</span></NavLink>
+            <NavLink className={conocimiento} onClick={() => { activar('conocimiento') }} id='conocimientos' to='/conocimientos'><i className="fa fa-fw fa-star"></i> <span className='spanName'>conocimientos</span></NavLink>
             {
                 login &&
                 <NavLink className={actualizar} onClick={() => { activar('actulizar') }} id='update' to='/CargaDatos' ><i className="fa-solid fa-key"></i><span> Actulizacion</span></NavLink>

@@ -1,6 +1,6 @@
 //import { useEffect, useState, useRef } from "react";
 import { addDoc, getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getStorage,uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
@@ -52,4 +52,13 @@ export const loginApp = async (usuario, password) => {
 
 export const loginOut = async () => {
     await signOut(auth)
+}
+
+export const uploadFileToStorage = async(file, fileName)=>{
+    const storageRef = ref(storage, fileName)
+    await uploadBytes(storageRef, file)
+    const url = await getDownloadURL(storageRef)
+    console.log(url)
+    return url
+
 }

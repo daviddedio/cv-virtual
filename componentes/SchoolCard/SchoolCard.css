@@ -1,7 +1,5 @@
 .schoolCard {
     width: 90%;
-    margin: 10px;
-    padding: 10px;
     border: 1px solid black;
     display: flexbox;
     display: flex;
@@ -27,22 +25,42 @@
     margin: 0px;
 }
 
-.SCimgConteiner>img {
+/*.SCimgConteiner>img {
     object-fit: cover;
     width: 250px;
     height: 100%;
-}
+}*/
 
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .schoolCard {
         height: 300px;
+        margin: 5px;
+        padding: 0px;
+    }
+
+    .SCimgConteiner>img {
+        object-fit: cover;
+        width: 100px;
+        height: 100px;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+    .schoolCard {
+        height: 200px;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .SCimgConteiner>img {
+        object-fit: cover;
+        width: 100px;
+        height: 100px;
+    }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {}
@@ -50,7 +68,15 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .schoolCard {
-        height: 400px;
+        height: 300px;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .SCimgConteiner>img {
+        object-fit: cover;
+        width: 200px;
+        height: 100%;
     }
 }
 
@@ -58,5 +84,11 @@
 @media only screen and (min-width: 1200px) {
     .schoolCard {
         height: 200px;
+    }
+    
+    .SCimgConteiner>img {
+        object-fit: cover;
+        width: 200px;
+        height: 100%;
     }
 }

@@ -37,7 +37,7 @@ export const Footer = () => {
                     <>
                         <li className="linka"><i className="fa-brands fa-linkedin fa-xl"/> Linkedin: <a href={array["Linkedin"]} target="_blank">Link</a></li>
                         <li className="linka"><i className="fa-brands fa-github fa-xl"/> GitHub: <a href={array["GitHub"]} target="_blank">Link</a></li>
-                        <li className="linka"><i className="fa-solid fa-file-arrow-down fa-xl"/> Descarga CV: <a href="David CV.pdf" target="_blank">Link</a></li>
+                        <li className="linka"><i className="fa-solid fa-file-arrow-down fa-xl"/> Descarga CV: <a href={array["CV"]} target="_blank">Link</a></li>
                     </>
                 }
             </ul>
